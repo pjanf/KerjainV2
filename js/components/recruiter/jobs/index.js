@@ -13,7 +13,7 @@ class Jobs extends Component {
 				<Header style={{ backgroundColor:'#d35400' }}>
 					<StatusBar barStyle="light-content" backgroundColor='#d35400' />
 					<Left>
-						<Button transparent onPress={() => this.props.navigation.navigate("HomeRecruiter")}>
+						<Button transparent onPress={() => this.props.navigation.navigate("MenuBarRecruiter")}>
 							<Icon name="menu" />
 						</Button>
 					</Left>

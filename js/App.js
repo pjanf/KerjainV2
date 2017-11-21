@@ -48,6 +48,7 @@ import ScheduleS from "./components/recruiter/schedule/indexS";
 import Candidate from "./components/recruiter/candidate/";
 import CandidateI from "./components/recruiter/candidate/indexI";
 import CandidateS from "./components/recruiter/candidate/indexS";
+import MenuBarRecruiter from "./components/recruiter/menubar/";
 
 const AppNavigator = StackNavigator(
     {
@@ -76,7 +77,7 @@ const AppNavigator = StackNavigator(
         InterviewStep2: { screen: InterviewStep2 },
 
         HomeRecruiter: { screen: HomeRecruiter },
-        JobPosting: { screen: JobsPosting },
+        JobsPosting: { screen: JobsPosting },
         JobsPostingAdd: { screen: JobsPostingAdd },
         CompanyProfile: { screen: CompanyProfile },
         CompanyDetail: { screen: CompanyDetail },
@@ -88,6 +89,7 @@ const AppNavigator = StackNavigator(
         Candidate : { screen: Candidate },
         CandidateI: { screen: CandidateI },
         CandidateS: { screen: CandidateS },
+        MenuBarRecruiter: { screen: MenuBarRecruiter },
     },
     {
         initialRouteName: "Drawer",

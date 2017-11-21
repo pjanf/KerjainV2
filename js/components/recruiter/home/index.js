@@ -20,7 +20,8 @@ class Home extends Component {
 					<Left>
 						<Button
 						transparent
-						onPress={() => this.props.navigation.navigate("CompanyProfile")}
+						//onPress={() => this.props.navigation.navigate("CompanyProfile")}
+						onPress={() => this.props.navigation.navigate("MenuBarRecruiter")}
 						>
 						<Icon name="menu" />
 						</Button>
