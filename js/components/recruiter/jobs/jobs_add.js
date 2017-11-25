@@ -4,11 +4,13 @@ import { Card, CardItem, Thumbnail, Container, Picker, InputGroup, Content, Badg
 import styles from "./styles";
 import DatePicker from 'react-native-datepicker'
 
+
 import JobPosting from './jobPosting';
 import VideoQuestion from './videoQuestion';
 
 const imgJobMbdev = require("../../../../img/web-cover1.jpg");
 const imgJobDesain = require("../../../../img/camera.png");
+
 
 class JobAdd extends Component {
 	constructor(props) {

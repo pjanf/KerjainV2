@@ -3,6 +3,11 @@ package com.kerjain;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.realm.react.RealmReactPackage;
+import com.brentvatne.react.ReactVideoPackage;
+import com.github.yamill.orientation.OrientationPackage;
+import com.airbnb.android.react.maps.MapsPackage;
+import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.github.yamill.orientation.OrientationPackage;
 import com.airbnb.android.react.maps.MapsPackage;
@@ -27,7 +32,8 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
+            new MainReactPackage(),
+            new RealmReactPackage(),
             new ReactVideoPackage(),
             new OrientationPackage(),
             new MapsPackage(),

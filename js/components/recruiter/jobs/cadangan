@@ -1,0 +1,34 @@
+return (
+      <Container style={styles.container}>
+        <Content style={styles.content}>
+          <View>
+            <View>
+              <Text>
+                Welcome to Realm Imgur Viewer
+              </Text>
+            </View>
+            <ScrollView>
+              <TextInput
+                value={this.state.title}
+                onChangeText={(text) => this._updateTitle(text)}
+                placeholder='What Do You Like?' />
+                <TextInput
+                value={this.state.salary}
+                onChangeText={(text) => this._updateSalary(text)}
+                placeholder='Salary?' />
+              <View>
+                <TouchableHighlight 
+                  underlayColor='#3f62aa'
+                  onPress={() => this._addItem()}>
+                  <Text>Add Item</Text>
+                </TouchableHighlight>
+              </View>
+              <View>
+                <Text>FAVORITES</Text>
+                {favorites}
+              </View>
+            </ScrollView>
+          </View>
+      </Content>
+      </Container>
+    ) 

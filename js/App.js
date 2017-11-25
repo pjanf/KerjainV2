@@ -49,6 +49,7 @@ import Candidate from "./components/recruiter/candidate/";
 import CandidateI from "./components/recruiter/candidate/indexI";
 import CandidateS from "./components/recruiter/candidate/indexS";
 import MenuBarRecruiter from "./components/recruiter/menubar/";
+import Tes from "./components/recruiter/tes/";
 
 const AppNavigator = StackNavigator(
     {
@@ -90,6 +91,7 @@ const AppNavigator = StackNavigator(
         CandidateI: { screen: CandidateI },
         CandidateS: { screen: CandidateS },
         MenuBarRecruiter: { screen: MenuBarRecruiter },
+        Tes: {screen: Tes}
     },
     {
         initialRouteName: "Drawer",
