@@ -11,11 +11,29 @@ import styles from './style';
 
 const Realm = require ('realm');
 
-let realm = new Realm({
-  schema: [{name: 'JobsPosting6', properties: {title: 'string', salary: 'string', title: 'string', location: 'string', description: 'string', requirement: 'string'}}]
-})
+const WorkExperience= {
+    name: 'WorkExperience',
+    properties: {
+    companyName: 'string',
+    position: 'string',
+    description: 'string'
+    }
+};
 
-let favs = realm.objects('JobsPosting6')
+const JobsPosting7 = {
+  name: 'JobsPosting7',
+  properties: {
+    title:     'string',
+    salary: 'string',
+    location: 'string',
+    description: 'string',
+    requirement: 'string'
+  }
+};
+
+let realm = new Realm({schema: [WorkExperience, JobsPosting7]});
+
+let favs = realm.objects('JobsPosting7')
 
 export default class PersonalInfo extends Component { // eslint-disable-line
 
@@ -51,24 +69,14 @@ export default class PersonalInfo extends Component { // eslint-disable-line
   _addItem () {
     if (this.state.title === '') return
       realm.write(() => {
-      realm.create('JobsPosting6', { title: this.state.title, salary: this.state.salary, location: this.state.location, 
+      realm.create('JobsPosting7', { title: this.state.title, salary: this.state.salary, location: this.state.location,
         description: this.state.description, requirement:this.state.requirement})
     })
-    this.setState({ title: '', salary: '', location: '', description: '', requirement: ''})
+    this.setState({ title: '', salary: '', location: '', description: '', requirement: ''}),
+    this.props.navigation.navigate("JobsPosting")
   }
 
   render () {
-    let favorites = _.map(favs, (f, i) => {
-      return (
-      <View key={i}>
-          <Text>{f.title}</Text>
-          <Text>{f.salary}</Text>
-          <Text>{f.location}</Text>  
-          <Text>{f.description}</Text>  
-          <Text>{f.requirement}</Text>  
-
-      </View>)
-    })
     return (
       <Container style={styles.container}>
         <Content style={styles.content}>

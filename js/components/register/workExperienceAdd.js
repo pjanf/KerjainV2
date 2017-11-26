@@ -7,17 +7,65 @@ import styles from "./styles";
 
 import DatePicker from 'react-native-datepicker'
 
+const Realm = require ('realm');
+
+const WorkExperience= {
+    name: 'WorkExperience',
+    properties: {
+    companyName: 'string',
+    position: 'string',
+    description: 'string'
+    }
+};
+
+const JobsPosting7 = {
+  name: 'JobsPosting7',
+  properties: {
+    title:     'string',
+    salary: 'string',
+    location: 'string',
+    description: 'string',
+    requirement: 'string'
+  }
+};
+
+let realm = new Realm({schema: [WorkExperience, JobsPosting7]});
+
+let favs = realm.objects('WorkExperience')
+
 class Register extends Component {
 	// eslint-disable-line
 
 	 constructor(props) {
-	    super(props);
-	    this.state = {    
-	      	description: '',
-	      	dateJoin:'',
-      	  	dateLeft:'',
-	    };
-	  }
+        super(props);
+        this.state = {
+            description: '',
+            dateJoin:'',
+            dateLeft:'',
+            companyName: '',
+            position: '',
+            description: ''
+        };
+	 }
+
+      _updateCompanyName (companyName) {
+        this.setState({ companyName })
+      }
+      _updatePosition (position) {
+        this.setState({ position })
+      }
+      _updateDescription (description) {
+        this.setState({ description })
+      }
+
+      _addItem () {
+        if (this.state.companyName === '') return
+          realm.write(() => {
+          realm.create('WorkExperience', { companyName: this.state.companyName, position: this.state.position,
+            description: this.state.description})
+        })
+        this.setState({ companyName: '', position: '', description: ''})
+      }
 
 	render() {
 		const {goBack} = this.props.navigation;
@@ -40,10 +88,12 @@ class Register extends Component {
 					<StatusBar barStyle="light-content" backgroundColor='#189DAE' />
 					<Card bordered style={{paddingRight : 20, paddingBottom : 10}}>
 						<Form>
-				            <Item floatingLabel>
-				              <Label>Company Name </Label>
-				              <Input />
-				            </Item>
+				            <Item>
+                              <Input placeholder = "Job's  Title" style={{fontSize:13}}
+                                value={this.state.title}
+                                onChangeText={(text) => this._updateTitle(text)}
+                               />
+                            </Item>
 				            <Item floatingLabel>
 				              <Label>Position</Label>
 				              <Input />
@@ -86,7 +136,7 @@ class Register extends Component {
 				    </Card>
 		        	<Button rounded info style={{marginTop : 10, marginBottom : 20, alignSelf : 'center', height : 50}}
 		        		onPress={() => this.props.navigation.navigate("WorkExperience")} >
-		        		<Text>             Save             </Text>
+		        		<Text>Save</Text>
 		        	</Button>
 				</Content>
 			</Container>

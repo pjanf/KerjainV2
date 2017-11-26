@@ -23,13 +23,29 @@ import {
 
 import styles from "./style";
 
-const Realm = require ('realm');
+const WorkExperience= {
+    name: 'WorkExperience',
+    properties: {
+    companyName: 'string',
+    position: 'string',
+    description: 'string'
+    }
+};
 
-let realm = new Realm({
-    schema: [{name: 'JobsPosting6', properties: {title: 'string', salary: 'string', title: 'string', location: 'string', description: 'string', requirement: 'string'}}]
-  })
+const JobsPosting7 = {
+  name: 'JobsPosting7',
+  properties: {
+    title:     'string',
+    salary: 'string',
+    location: 'string',
+    description: 'string',
+    requirement: 'string'
+  }
+};
 
-let favs = realm.objects('JobsPosting6')
+let realm = new Realm({schema: [WorkExperience, JobsPosting7]});
+
+let favs = realm.objects('JobsPosting7')
 
 const drawerImage = require("../../../../img/companyLogo/dataon.jpg");
 const companyImage = require("../../../../img/company/dataon/112116_NBC_1.jpg");

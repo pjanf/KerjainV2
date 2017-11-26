@@ -58,11 +58,3 @@ class JobAdd extends Component {
 	}
 }
 export default JobAdd;
-
-/*
-
-
-
-
-							
- */
