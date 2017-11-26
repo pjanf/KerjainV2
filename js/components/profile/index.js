@@ -34,11 +34,11 @@ class MyProfile extends Component {
 					<Left>
 						<View style={{flexDirection: 'row'}}>
 							<Button
-								transparent
-								onPress={() => goBack()}
-								>
-								<Icon name="ios-arrow-back" />
-							</Button>
+                                transparent
+                                onPress={() => goBack()}
+                                >
+                                <Icon name="ios-arrow-back" />
+                            </Button>
 							<Title style={{marginTop : 10, marginLeft : 10}}>Profile</Title>
 						</View>
 					</Left>
@@ -47,6 +47,7 @@ class MyProfile extends Component {
 						<View style={styles.overlay}/>
 						<Thumbnail large source={cover} style={styles.drawerImage} />
 						<Text style={styles.textDrawer1}> Ario Hardi Wibowo </Text>
+						<Text style={styles.textDrawer2}> ariohardi96@gmail.com </Text>
 					</Image>
 			        <Tabs tabBarUnderlineStyle= {{ backgroundColor:'#189DAE' }} renderTabBar={()=> <ScrollableTab />}>
 					    <Tab heading="Personal Info"

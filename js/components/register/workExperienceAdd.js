@@ -18,6 +18,15 @@ const WorkExperience= {
     }
 };
 
+const Education1= {
+    name: 'Education1',
+    properties: {
+    school: 'string',
+    degree: 'string',
+    major: 'string'
+    }
+};
+
 const JobsPosting7 = {
   name: 'JobsPosting7',
   properties: {
@@ -29,7 +38,7 @@ const JobsPosting7 = {
   }
 };
 
-let realm = new Realm({schema: [WorkExperience, JobsPosting7]});
+let realm = new Realm({schema: [WorkExperience, JobsPosting7, Education1]});
 
 let favs = realm.objects('WorkExperience')
 
@@ -89,13 +98,13 @@ class Register extends Component {
 					<Card bordered style={{paddingRight : 20, paddingBottom : 10}}>
 						<Form>
 				            <Item>
-                              <Input placeholder = "Company Name" style={{fontSize:17}}
+                              <Input placeholder = "Company Name" style={{fontSize:16}}
                                 value={this.state.companyName}
                                 onChangeText={(text) => this._updateCompanyName(text)}
                                />
                             </Item>
 				            <Item>
-                              <Input placeholder = "Position" style={{fontSize:17}}
+                              <Input placeholder = "Position" style={{fontSize:16}}
                                 value={this.state.position}
                                 onChangeText={(text) => this._updatePosition(text)}
                                />
@@ -126,7 +135,7 @@ class Register extends Component {
 					            onDateChange={(date) => {this.setState({dateLeft: date})}}
 					          />
                             <Item>
-                              <Input placeholder = " Job Description" style={{fontSize:17}}
+                              <Input placeholder = " Job Description" style={{fontSize:16}}
                                 multiline = {true}
                                 numberOfLines = {4}
                                 value={this.state.description}
@@ -142,8 +151,6 @@ class Register extends Component {
 				</Content>
 			</Container>
 		);
-
-
 	}
 }
 

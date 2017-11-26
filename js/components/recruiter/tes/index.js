@@ -34,6 +34,15 @@ const WorkExperience= {
     }
 };
 
+const Education1= {
+    name: 'Education1',
+    properties: {
+    school: 'string',
+    degree: 'string',
+    major: 'string'
+    }
+};
+
 const JobsPosting7 = {
   name: 'JobsPosting7',
   properties: {
@@ -45,9 +54,9 @@ const JobsPosting7 = {
   }
 };
 
-let realm = new Realm({schema: [WorkExperience, JobsPosting7]});
+let realm = new Realm({schema: [WorkExperience, JobsPosting7, Education1]});
 
-let favs = realm.objects('WorkExperience')
+let favs = realm.objects('Education1')
 
 const drawerImage = require("../../../../img/companyLogo/dataon.jpg");
 const companyImage = require("../../../../img/company/dataon/112116_NBC_1.jpg");
@@ -65,7 +74,10 @@ export default class Tes extends Component {
             requirement: '',
             companyName: '',
             position: '',
-            description: ''
+            description: '',
+            school: '',
+            degree: '',
+            major: ''
         };
     }
 
@@ -84,16 +96,16 @@ export default class Tes extends Component {
               <CardItem key={i}>
                 <View style={{ flex:1, flexDirection:'column' }}>
                     <View style={{ flex:2, flexDirection:'row', marginBottom:10 }}>
-                        <Text style={{ flex:1, fontSize:16, fontFamily:'Roboto', color:'#d35400' }}>{f.companyName}</Text>
-                        <Text style={{ flex:1, fontSize:16, fontFamily:'Roboto', color:'#d35400' }}>{f.position}</Text>
-                        <Text style={{ flex:1, fontSize:16, fontFamily:'Roboto', color:'#d35400' }}>{f.description}</Text>
+                        <Text style={{ flex:1, fontSize:16, fontFamily:'Roboto', color:'#d35400' }}>{f.school}</Text>
+                        <Text style={{ flex:1, fontSize:16, fontFamily:'Roboto', color:'#d35400' }}>{f.degree}</Text>
+                        <Text style={{ flex:1, fontSize:16, fontFamily:'Roboto', color:'#d35400' }}>{f.major}</Text>
                         <TouchableOpacity style={{flex:1, height:28, left:135}}
                           onPress={() => Alert.alert(
                                 'Confirmation',
                                 'Do you really want to delete?',
                                 [
                                 {text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
-                                {text: 'OK', onPress: () => this._deleteItem(f.companyName)},
+                                {text: 'OK', onPress: () => this._deleteItem(f.school)},
                                 ]
                             )}
                           underlayColor='transparent'>
@@ -135,7 +147,7 @@ export default class Tes extends Component {
                     <Icon name="menu" />
                 </Button>
             </Left>
-            <Body><Title>Testing Page</Title></Body>
+            <Body><Title>Kerja.In Offical Testing Page</Title></Body>
         </Header>
         <Content style={{ backgroundColor:'#f0f0f0', padding:10 }}>
         <View>

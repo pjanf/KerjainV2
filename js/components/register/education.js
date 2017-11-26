@@ -20,71 +20,125 @@ const datas = [
   },
 ];
 
+const Realm = require ('realm');
+
+const WorkExperience= {
+    name: 'WorkExperience',
+    properties: {
+    companyName: 'string',
+    position: 'string',
+    description: 'string'
+    }
+};
+
+const Education1= {
+    name: 'Education1',
+    properties: {
+    school: 'string',
+    degree: 'string',
+    major: 'string'
+    }
+};
+
+const JobsPosting7 = {
+  name: 'JobsPosting7',
+  properties: {
+    title:     'string',
+    salary: 'string',
+    location: 'string',
+    description: 'string',
+    requirement: 'string',
+  }
+};
+
+let realm = new Realm({schema: [WorkExperience, JobsPosting7, Education1]});
+
+let favs = realm.objects('Education1')
+
 class Register extends Component {
 	// eslint-disable-line
 
+    _deleteItem (school) {
+        let itemToDelete = favs.filtered('school = $0', school)
+        realm.write(() => {
+          realm.delete(itemToDelete)
+        })
+        this.forceUpdate()
+    }
+
 	render() {
 		const {goBack} = this.props.navigation;
+		let favorites = _.map(favs, (f, i) => {
+            return (
+                <Card bordered style={{backgroundColor : '#E0E0E0', paddingLeft : 10, paddingRight : 10, paddingBottom : 10}}>
+                    <CardItem key={i} style={{marginTop : 5, marginBottom : 5, paddingTop : 10}}>
+                        <Body>
+                            <View style={{flexDirection : 'row', flex : 6}}>
+                                <TouchableOpacity transparent style={{flex : 5}}>
+                                  <Text style={{fontSize: 18, color : 'blue'}}>{f.school}</Text>
+                                </TouchableOpacity>
+                                <Right>
+                                    <TouchableOpacity
+                                    onPress={() => Alert.alert(
+                                        'Confirmation',
+                                        'Do you really want to delete?',
+                                        [
+                                        {text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
+                                        {text: 'OK', onPress: () => this._deleteItem(f.school)},
+                                        ]
+                                    )}>
+                                         <Icon active name="remove-circle" style={{flex : 1, color : 'blue'}} />
+                                    </TouchableOpacity>
+                                </Right>
+                            </View>
+                            <View>
+                                <Text style={{fontSize : 15, marginTop : 10, color : 'grey'}}>Graduation</Text>
+                                <Text style={{marginTop : 5}}>10 February 2018</Text>
+
+                                <Text style={{fontSize : 15, marginTop : 10, color : 'grey'}}>Degree</Text>
+                                <Text style={{marginTop : 5}}>{f.degree}</Text>
+
+                                <Text style={{fontSize : 15, marginTop : 10, color : 'grey'}}>Major</Text>
+                                <Text style={{marginTop : 5}}>{f.major}</Text>
+                            </View>
+                        </Body>
+                    </CardItem>
+                </Card>
+            )
+		})
 		return (
-			<Container style={styles.container}>			
-				<Header style={{ backgroundColor:'#189DAE' }}>
-					<Button
-						transparent
-						onPress={() => goBack()}
-						>
-						<Icon name="ios-arrow-back" />
-					</Button>
-					<Title style={{marginTop : 15, marginLeft : 10}}> Education</Title>
-					<Right>
-						<Title style={{marginLeft : 10}}> STEP 3 of 3</Title>
-					</Right>
-					
-				</Header>
-				<Content style={styles.content}>
-					<Right>
-						<Button iconLeft info onPress={() => this.props.navigation.navigate("EducationAdd")} style={{marginLeft : 220}}>
-							<Icon active name="add" style={{color : 'white'}}/>
-							<Text>Add</Text>
-						</Button>
-					</Right>
-					<StatusBar barStyle="light-content" backgroundColor='#189DAE' />
-						<Card bordered style={{backgroundColor : '#E0E0E0', paddingLeft : 10, paddingRight : 10}}>
-							<List dataArray={datas} renderRow={data =>
-					          	<CardItem style={{marginTop : 5, marginBottom : 5, paddingBottom : 10}}>
-					           	 	<Body>
-					           	 		<View style={{flexDirection : 'row', flex : 6}}>
-							           	  	<TouchableOpacity transparent style={{flex : 5}}>	
-								              <Text style={{fontSize: 18, color : 'blue'}}>{data.instituteName}</Text>
-								            </TouchableOpacity>
-									        <Right>
-									        	<TouchableOpacity>
-									        		 <Icon active name="remove-circle" style={{flex : 1, color : 'blue'}} />
-									        	</TouchableOpacity>
-									        </Right>
-							            </View>
-							            <View>
-								            <Text style={{fontSize : 15, marginTop : 10, color : 'grey'}}>Graduation</Text>
-								            <Text style={{marginTop : 5}}>{data.graduation}</Text>
-
-								            <Text style={{fontSize : 15, marginTop : 10, color : 'grey'}}>Degree</Text>
-								            <Text style={{marginTop : 5}}>{data.degree}</Text>
-
-								            <Text style={{fontSize : 15, marginTop : 10, color : 'grey'}}>Major</Text>
-								            <Text style={{marginTop : 5}}>{data.major}</Text>
-								        </View>
-					           		</Body>
-					          	</CardItem>
-					          }
-					        />
-					    </Card>
-			        	<Button rounded info style={{marginTop : 10, marginBottom : 20, alignSelf : 'center', height : 50}}
-			        		onPress={() => this.props.navigation.navigate("Home")} >
-			        		<Text>             Finished             </Text>
-			        	</Button>
-				</Content>
-			</Container>
-		);
+            <Container style={styles.container}>
+            <Header style={{ backgroundColor:'#189DAE' }}>
+                <Button
+                    transparent
+                    onPress={() => goBack()}
+                    >
+                    <Icon name="ios-arrow-back" />
+                </Button>
+                <Title style={{marginTop : 15, marginLeft : 10}}>Education</Title>
+                <Right>
+                    <Title style={{marginLeft : 10}}> STEP 3 of 3</Title>
+                </Right>
+            </Header>
+            <Content style={{ backgroundColor:'#f0f0f0', padding:10 }}>
+            <View>
+                <Right>
+                    <Button iconLeft info onPress={() => this.props.navigation.navigate("EducationAdd")} style={{marginLeft : 220}}>
+                        <Icon active name="add" style={{color : 'white'}}/>
+                        <Text>Add</Text>
+                    </Button>
+                </Right>
+            </View>
+            <View>
+              {favorites}
+            </View>
+            <Button rounded info style={{marginTop : 10, marginBottom : 20, alignSelf : 'center', height : 50}}
+                onPress={() => this.props.navigation.navigate("Home")}>
+                <Text>Finish</Text>
+            </Button>
+            </Content>
+            </Container>
+        );
 	}
 }
-
 export default Register;

@@ -31,6 +31,15 @@ const WorkExperience= {
     }
 };
 
+const Education1 = {
+    name: 'Education1',
+    properties: {
+    school: 'string',
+    degree: 'string',
+    major: 'string'
+    }
+};
+
 const JobsPosting7 = {
   name: 'JobsPosting7',
   properties: {
@@ -42,7 +51,7 @@ const JobsPosting7 = {
   }
 };
 
-let realm = new Realm({schema: [WorkExperience, JobsPosting7]});
+let realm = new Realm({schema: [WorkExperience, JobsPosting7, Education1]});
 
 let favs = realm.objects('WorkExperience')
 
@@ -95,11 +104,8 @@ class Register extends Component {
                         </Body>
                     </CardItem>
                 </Card>
-
-
             )
 		})
-
 		return (
             <Container style={styles.container}>
             <Header style={{ backgroundColor:'#189DAE' }}>
@@ -136,5 +142,4 @@ class Register extends Component {
         );
 	}
 }
-
 export default Register;

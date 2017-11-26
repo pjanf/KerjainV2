@@ -32,6 +32,15 @@ const WorkExperience= {
     }
 };
 
+const Education1= {
+    name: 'Education1',
+    properties: {
+    school: 'string',
+    degree: 'string',
+    major: 'string'
+    }
+};
+
 const JobsPosting7 = {
   name: 'JobsPosting7',
   properties: {
@@ -43,7 +52,7 @@ const JobsPosting7 = {
   }
 };
 
-let realm = new Realm({schema: [WorkExperience, JobsPosting7]});
+let realm = new Realm({schema: [WorkExperience, JobsPosting7, Education1]});
 
 let favs = realm.objects('JobsPosting7')
 
@@ -129,15 +138,14 @@ export default class Jobs extends Component {
                     </Button>
                 </Left>
                 <Body><Title>Job List</Title></Body>
-            </Header>
-            <Content style={{ backgroundColor:'#f0f0f0', padding:10 }}>
-            <View>
                 <Right>
                     <Button transparent bordered danger style= {{marginLeft : 260, marginBottom : 10}} onPress={() => this.props.navigation.navigate("JobsPostingAdd")}>
                         <Icon name='add' />
                   </Button>
                 </Right>
-            </View>
+            </Header>
+            <Content style={{ backgroundColor:'#f0f0f0', padding:10 }}>
+
             <View>
               {favorites}
             </View>

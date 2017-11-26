@@ -40,6 +40,10 @@ export default {
     fontSize : 20,
     marginTop : 35,
   },
+  textDrawer2: {
+      color : 'white',
+      alignItems: 'center',
+    },
   overlay: {
     position: 'absolute',
     top: 0,

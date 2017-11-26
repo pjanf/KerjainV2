@@ -20,6 +20,15 @@ const WorkExperience= {
     }
 };
 
+const Education1= {
+    name: 'Education1',
+    properties: {
+    school: 'string',
+    degree: 'string',
+    major: 'string'
+    }
+};
+
 const JobsPosting7 = {
   name: 'JobsPosting7',
   properties: {
@@ -31,7 +40,7 @@ const JobsPosting7 = {
   }
 };
 
-let realm = new Realm({schema: [WorkExperience, JobsPosting7]});
+let realm = new Realm({schema: [WorkExperience, JobsPosting7, Education1]});
 
 let favs = realm.objects('JobsPosting7')
 
@@ -129,19 +138,12 @@ export default class PersonalInfo extends Component { // eslint-disable-line
                     />
                   </Form>
               </CardItem>
-              <Button rounded style={{alignSelf: 'center', 
-                marginTop:20, marginBottom:20, backgroundColor:'#d35400' }} onPress={() => this.props.navigation.navigate("JobsPosting")}>
-                <Text>Save Jobs</Text>
-              </Button>
-              <Button rounded style={{alignSelf: 'center', 
+
+            </Card>
+            <Button rounded style={{alignSelf: 'center',
                 marginTop:20, marginBottom:20, backgroundColor:'#d35400' }}  onPress={() => this._addItem()}>
                 <Text>Submit</Text>
-              </Button>
-              <Button rounded style={{alignSelf: 'center', 
-                marginTop:20, marginBottom:20, backgroundColor:'#d35400' }} onPress={() => this.props.navigation.navigate("Tes")}>
-                <Text>CUMAN NGETES</Text>
-              </Button>
-            </Card>
+            </Button>
           </View>
         </Content>
       </Container>

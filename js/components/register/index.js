@@ -9,16 +9,10 @@ class Register extends Component {
 	// eslint-disable-line
 
 	render() {
-		const {goBack} = this.props.navigation;
+		//const {goBack} = this.props.navigation;
 		return (
 			<Container style={styles.container}>			
 				<Header style={{ backgroundColor:'#189DAE' }}>
-					<Button
-						transparent
-						onPress={() => goBack()}
-						>
-						<Icon name="ios-arrow-back" />
-					</Button>
 					<Title style={{marginTop : 15, marginLeft : 10}}> Personal Info</Title>
 					<Right>
 						<Title style={{marginLeft : 10}}> STEP 1 of 3</Title>
