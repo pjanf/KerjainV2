@@ -6,6 +6,7 @@ import { Platform } from "react-native";
 import { Root } from "native-base";
 import { StackNavigator, TabNavigator } from "react-navigation";
 
+import SideBar from "./components/sidebar";
 import Drawer from "./Drawer";
 import DrawerRecruiter from "./DrawerRecruiter";
 import Login from "./components/login/";
@@ -53,6 +54,7 @@ import Tes from "./components/recruiter/tes/";
 
 const AppNavigator = StackNavigator(
     {
+        SideBar: {screen: SideBar},
         Drawer: { screen: Drawer },
         Login: { screen: Login },
         LoginRecruiter: { screen: LoginRecruiter },

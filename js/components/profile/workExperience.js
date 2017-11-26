@@ -33,7 +33,7 @@ export default class WorkExperience extends Component { // eslint-disable-line
 			            <Icon name="briefcase"/>
 			            <Text style={{marginLeft : 10, marginTop : 5, color : '#189DAE', fontSize : 17}}>Work Experience</Text>
 			            <Right>
-			              <TouchableOpacity>
+			              <TouchableOpacity onPress={() => this.props.navigation.navigate("WorkExperienceAdd")}>
 			                <Icon name="add" style={{color : '#189DAE', marginRight : 10}}/>
 			              </TouchableOpacity>
 			            </Right>

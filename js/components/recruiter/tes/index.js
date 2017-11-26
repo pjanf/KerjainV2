@@ -47,7 +47,7 @@ const JobsPosting7 = {
 
 let realm = new Realm({schema: [WorkExperience, JobsPosting7]});
 
-let favs = realm.objects('JobsPosting7')
+let favs = realm.objects('WorkExperience')
 
 const drawerImage = require("../../../../img/companyLogo/dataon.jpg");
 const companyImage = require("../../../../img/company/dataon/112116_NBC_1.jpg");
@@ -62,7 +62,10 @@ export default class Tes extends Component {
             salary: '',
             location: '',
             description: '',
-            requirement: ''
+            requirement: '',
+            companyName: '',
+            position: '',
+            description: ''
         };
     }
 
@@ -81,14 +84,16 @@ export default class Tes extends Component {
               <CardItem key={i}>
                 <View style={{ flex:1, flexDirection:'column' }}>
                     <View style={{ flex:2, flexDirection:'row', marginBottom:10 }}>
-                        <Text style={{ flex:1, fontSize:16, fontFamily:'Roboto', color:'#d35400' }}>{f.title}</Text>
+                        <Text style={{ flex:1, fontSize:16, fontFamily:'Roboto', color:'#d35400' }}>{f.companyName}</Text>
+                        <Text style={{ flex:1, fontSize:16, fontFamily:'Roboto', color:'#d35400' }}>{f.position}</Text>
+                        <Text style={{ flex:1, fontSize:16, fontFamily:'Roboto', color:'#d35400' }}>{f.description}</Text>
                         <TouchableOpacity style={{flex:1, height:28, left:135}}
                           onPress={() => Alert.alert(
                                 'Confirmation',
                                 'Do you really want to delete?',
                                 [
                                 {text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
-                                {text: 'OK', onPress: () => this._deleteItem(f.title)},
+                                {text: 'OK', onPress: () => this._deleteItem(f.companyName)},
                                 ]
                             )}
                           underlayColor='transparent'>
@@ -122,30 +127,29 @@ export default class Tes extends Component {
       )
     })
     return (
-            <Container style={styles.container}>
-            <Header style={{ backgroundColor:'#d35400' }}>
-                <StatusBar barStyle="light-content" backgroundColor='#d35400' />
-                <Left>
-                    <Button transparent onPress={() => this.props.navigation.navigate("MenuBarRecruiter")}>
-                        <Icon name="menu" />
-                    </Button>
-                </Left>
-                <Body><Title>Testing Page</Title></Body>
-            </Header>
-            <Content style={{ backgroundColor:'#f0f0f0', padding:10 }}>
-            <View>
-                <Right>
-                    <Button transparent bordered danger style= {{marginLeft : 260, marginBottom : 10}} onPress={() => this.props.navigation.navigate("JobsPostingAdd")}>
-                        <Icon name='add' />
-                  </Button>
-                </Right>
-            </View>
-            <View>
-              {favorites}
-            </View>
-            </Content>
-            </Container>
-
+        <Container style={styles.container}>
+        <Header style={{ backgroundColor:'#d35400' }}>
+            <StatusBar barStyle="light-content" backgroundColor='#d35400' />
+            <Left>
+                <Button transparent onPress={() => this.props.navigation.navigate("MenuBarRecruiter")}>
+                    <Icon name="menu" />
+                </Button>
+            </Left>
+            <Body><Title>Testing Page</Title></Body>
+        </Header>
+        <Content style={{ backgroundColor:'#f0f0f0', padding:10 }}>
+        <View>
+            <Right>
+                <Button transparent bordered danger style= {{marginLeft : 260, marginBottom : 10}} onPress={() => this.props.navigation.navigate("JobsPostingAdd")}>
+                    <Icon name='add' />
+              </Button>
+            </Right>
+        </View>
+        <View>
+          {favorites}
+        </View>
+        </Content>
+        </Container>
     )
   }
 }

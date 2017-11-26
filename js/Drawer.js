@@ -57,7 +57,7 @@ const Drawer = DrawerNavigator(
     JobPosting: { screen: JobsPosting },
     JobsPostingAdd: { screen: JobsPostingAdd },
     CompanyDetail: { screen: CompanyDetail },
-    CompanyVideo: { screen: CompanyVideo }, 
+    CompanyVideo: { screen: CompanyVideo },
   },
   {
     initialRouteName: "Login",

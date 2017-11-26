@@ -39,7 +39,6 @@ class Register extends Component {
 	 constructor(props) {
         super(props);
         this.state = {
-            description: '',
             dateJoin:'',
             dateLeft:'',
             companyName: '',
@@ -65,6 +64,7 @@ class Register extends Component {
             description: this.state.description})
         })
         this.setState({ companyName: '', position: '', description: ''})
+        this.props.navigation.navigate("WorkExperience")
       }
 
 	render() {
@@ -89,16 +89,18 @@ class Register extends Component {
 					<Card bordered style={{paddingRight : 20, paddingBottom : 10}}>
 						<Form>
 				            <Item>
-                              <Input placeholder = "Job's  Title" style={{fontSize:13}}
-                                value={this.state.title}
-                                onChangeText={(text) => this._updateTitle(text)}
+                              <Input placeholder = "Company Name" style={{fontSize:17}}
+                                value={this.state.companyName}
+                                onChangeText={(text) => this._updateCompanyName(text)}
                                />
                             </Item>
-				            <Item floatingLabel>
-				              <Label>Position</Label>
-				              <Input />
-				            </Item>
-				            <Label style = {{marginTop : 15, marginLeft : 15}}>Working Periode</Label>	
+				            <Item>
+                              <Input placeholder = "Position" style={{fontSize:17}}
+                                value={this.state.position}
+                                onChangeText={(text) => this._updatePosition(text)}
+                               />
+                            </Item>
+				            <Label style = {{fontSize:16, marginTop : 15, marginLeft : 15}}>Working Periode</Label>
 				            <DatePicker
 					            style={{width: 300, marginTop : 30, marginLeft : 20}}
 					            date={this.state.dateJoin}
@@ -123,24 +125,25 @@ class Register extends Component {
 					            cancelBtnText="Cancel"
 					            onDateChange={(date) => {this.setState({dateLeft: date})}}
 					          />
-				            <Label style = {{marginTop : 15, marginLeft : 15}}>Job Description</Label>
-				            <TextInput
-				            	style = {{marginLeft : 13}}
-					            multiline = {true}
-					            numberOfLines = {4}
-					            onChangeText={(description) => this.setState({description})}
-					            value={this.state.description}
-					            editable = {true} 
-					        />		            
+                            <Item>
+                              <Input placeholder = " Job Description" style={{fontSize:17}}
+                                multiline = {true}
+                                numberOfLines = {4}
+                                value={this.state.description}
+                                onChangeText={(text) => this._updateDescription(text)}
+                               />
+                            </Item>
 				        </Form>
 				    </Card>
 		        	<Button rounded info style={{marginTop : 10, marginBottom : 20, alignSelf : 'center', height : 50}}
-		        		onPress={() => this.props.navigation.navigate("WorkExperience")} >
+		        		onPress={() => this._addItem()} >
 		        		<Text>Save</Text>
 		        	</Button>
 				</Content>
 			</Container>
 		);
+
+
 	}
 }
 
