@@ -135,10 +135,6 @@ export default class PersonalInfo extends Component { // eslint-disable-line
               </Button>
             </Card>
           </View>
-          <View>
-            <Text>FAVORITES</Text>
-            {favorites}
-          </View>
         </Content>
       </Container>
     )

@@ -18,7 +18,7 @@ class JobAdd extends Component {
 		this.state = {    
 			  postjobs:'',
 		};
-	  }	
+	  }
 
 	render() {
 		const {goBack} = this.props.navigation;

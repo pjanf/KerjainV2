@@ -30,16 +30,19 @@ const datas = [
 
 class Schedule extends Component {
 	render() {
+	    const {goBack} = this.props.navigation;
 		return (
 			<Container style={styles.container}>
-				<Header style={{ backgroundColor:'#d35400' }}>
-					<Left>
-						<Button transparent onPress={() => this.props.navigation.navigate("DrawerOpen")}>
-							<Icon name="menu" />
-						</Button>
-					</Left>
-					<Body><Title>Schedule</Title></Body>
-				</Header>
+				<Header style={{ backgroundColor:'#d35400'}}>
+                    <Left>
+                        <View style={{flexDirection: 'row'}}>
+                            <Button transparent onPress={() => goBack()}>
+                                <Icon name="ios-arrow-back" style={{ color:'white' }}/>
+                            </Button>
+                            <Title style={{marginTop : 10, marginLeft : 10}}>Schedule</Title>
+                        </View>
+                    </Left>
+                </Header>
 
 		        <Content style={styles.container}>
 					<StatusBar barStyle="light-content" backgroundColor='#d35400' />
