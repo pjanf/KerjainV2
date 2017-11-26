@@ -25,11 +25,11 @@ import styles from "./style";
 
 const Realm = require ('realm');
 
- let realm = new Realm({
-    schema: [{name: 'JobsPosting5', properties: {title: 'string', salary: 'string'}}]
+let realm = new Realm({
+    schema: [{name: 'JobsPosting6', properties: {title: 'string', salary: 'string', title: 'string', location: 'string', description: 'string', requirement: 'string'}}]
   })
 
-let favs = realm.objects('JobsPosting5')
+let favs = realm.objects('JobsPosting6')
 
 const drawerImage = require("../../../../img/companyLogo/dataon.jpg");
 const companyImage = require("../../../../img/company/dataon/112116_NBC_1.jpg");

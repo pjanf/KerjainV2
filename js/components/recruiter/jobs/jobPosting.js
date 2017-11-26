@@ -12,10 +12,10 @@ import styles from './style';
 const Realm = require ('realm');
 
 let realm = new Realm({
-  schema: [{name: 'JobsPosting5', properties: {title: 'string', salary: 'string'}}]
+  schema: [{name: 'JobsPosting6', properties: {title: 'string', salary: 'string', title: 'string', location: 'string', description: 'string', requirement: 'string'}}]
 })
 
-let favs = realm.objects('JobsPosting5')
+let favs = realm.objects('JobsPosting6')
 
 export default class PersonalInfo extends Component { // eslint-disable-line
 
@@ -38,7 +38,7 @@ export default class PersonalInfo extends Component { // eslint-disable-line
   _updateSalary (salary) {
     this.setState({ salary })
   }
-  /*_updateLocation (location) {
+  _updateLocation (location) {
     this.setState({ location })
   }
   _updateDescription (description) {
@@ -46,14 +46,15 @@ export default class PersonalInfo extends Component { // eslint-disable-line
   }
   _updateRequirement (requirement) {
     this.setState({ requirement })
-  }*/
+  }
 
   _addItem () {
     if (this.state.title === '') return
       realm.write(() => {
-      realm.create('JobsPosting5', { title: this.state.title, salary: this.state.salary})
+      realm.create('JobsPosting6', { title: this.state.title, salary: this.state.salary, location: this.state.location, 
+        description: this.state.description, requirement:this.state.requirement})
     })
-    this.setState({ title: '', salary: ''})
+    this.setState({ title: '', salary: '', location: '', description: '', requirement: ''})
   }
 
   render () {
@@ -61,7 +62,11 @@ export default class PersonalInfo extends Component { // eslint-disable-line
       return (
       <View key={i}>
           <Text>{f.title}</Text>
-          <Text>{f.salary}</Text>  
+          <Text>{f.salary}</Text>
+          <Text>{f.location}</Text>  
+          <Text>{f.description}</Text>  
+          <Text>{f.requirement}</Text>  
+
       </View>)
     })
     return (
@@ -80,13 +85,13 @@ export default class PersonalInfo extends Component { // eslint-disable-line
                     <Item>
                       <Input placeholder = "Salary" style={{fontSize:13}} 
                         value={this.state.salary}
-                        onChangeText={(text) => this._updateTitle(text)}  
+                        onChangeText={(text) => this._updateSalary(text)}
                        />
                     </Item>
                     <Item>
                       <Input placeholder = "Location" style={{fontSize:13}} 
                         value={this.state.location}
-                        onChangeText={(text) => this._updateTitle(text)}  
+                        onChangeText={(text) => this._updateLocation(text)}
                        />
                     </Item>
                     <Item>
@@ -136,85 +141,6 @@ export default class PersonalInfo extends Component { // eslint-disable-line
           </View>
         </Content>
       </Container>
-    ) 
-    /*return (
-      <Container style={styles.container}>
-        <Content style={styles.content}>
-          <View style={{ backgroundColor:'#f0f0f0', padding:10 }}>
-              <Card>
-                <CardItem>
-                  <Form>
-                    <Item floatingLabel style={{marginRight : 30}}>
-                      <Label style={styles.textLabel}>Position Title</Label>
-                      <TextInput 
-                        value={this.state.title}
-                        onChangeText={(text) => this._updateTitle(text)}
-                       style={styles.inputLabel}/>
-                    </Item>
-                    <Item floatingLabel style={{marginRight : 30}}>
-                      <Label style={styles.textLabel}>Salary</Label>
-                      <TextInput 
-                        value={this.state.salary}
-                        onChangeText={(text) => this._updateSalary(text)}
-                       style={styles.inputLabel}/>
-                    </Item>
-                    <Item floatingLabel style={{marginRight : 30}}>
-                      <Label style={styles.textLabel}>Location</Label>
-                      <TextInput 
-                        value={this.state.location}
-                        onChangeText={(text) => this._updateLocation(text)}
-                       style={styles.inputLabel}/>
-                    </Item>
-                    <Item floatingLabel style={{marginRight : 30}}>
-                      <Label style={styles.textLabel}>Job Description</Label>
-                      <TextInput 
-                        value={this.state.description}
-                        onChangeText={(text) => this._updateDescription(text)}
-                       style={styles.inputLabel}/>
-                    </Item>
-                    <Item floatingLabel style={{marginRight : 30}}>
-                      <Label style={styles.textLabel}>Requirement</Label>
-                      <TextInput 
-                        value={this.state.requirement}
-                        onChangeText={(text) => this._updateRequirement(text)}
-                       style={styles.inputLabel}/>
-                    </Item>
-                    <Text style={{ fontSize:12, marginTop:20, marginLeft : 20 }}>Date Closed</Text>
-                    <DatePicker
-                      style={{width: 300, marginTop : 5, marginLeft : 20, marginRight : 10}}
-                      date={this.state.postjobs}
-                      mode="date"
-                      placeholder="Date Closed"
-                      format="YYYY-MM-DD"
-                      minDate="2010-05-01"
-                      maxDate="2030-06-01"
-                      confirmBtnText="Confirm"
-                      cancelBtnText="Cancel"
-                      onDateChange={(date) => {this.setState({postjobs: date})}}
-                    />
-                  </Form>
-                </CardItem>
-
-                <Button rounded style={{alignSelf: 'center', 
-                  marginTop:20, marginBottom:20, backgroundColor:'#d35400' }} onPress={() => this.props.navigation.navigate("JobsPosting")}>
-                    <Text>Save Jobs</Text>
-                  </Button>
-                  <Button rounded style={{alignSelf: 'center', 
-                  marginTop:20, marginBottom:20, backgroundColor:'#d35400' }}  onPress={() => this._addItem()}>
-                    <Text>Submit</Text>
-                  </Button>
-                  <Button rounded style={{alignSelf: 'center', 
-                  marginTop:20, marginBottom:20, backgroundColor:'#d35400' }} onPress={() => this.props.navigation.navigate("Tes")}>
-                    <Text>LIHAT TTGAN</Text>
-                  </Button>
-              </Card> 
-            </View>
-            <View>
-              <Text>FAVORITES</Text>
-              {favorites}
-            </View>
-        </Content>
-      </Container>
-    ) */
+    )
   }
 }
