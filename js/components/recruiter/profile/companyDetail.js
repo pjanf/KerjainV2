@@ -44,8 +44,7 @@ export default class PersonalInfo extends Component { // eslint-disable-line
                 <Text style={{fontSize : 15, color : '#d35400', paddingRight : 10}}>Location</Text>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate("LocationA")}>
                 <Text style={{marginTop : 5}}>
-                      Jalan Kuching Nomor 2,
-                      Kuala Lumpur
+                      Tangerang Selatan, Bintaro
                 </Text>
     						</TouchableOpacity>
 

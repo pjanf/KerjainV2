@@ -13,7 +13,7 @@ class MyProfile extends Component {
 	render() {
 		const {goBack} = this.props.navigation;
 		return (
-			<Container style={styles.container}>			
+			<Container style={styles.container}>
 				<Header style={{ backgroundColor:'#189DAE' }}>
 					<Left>
 						<View style={{flexDirection: 'row'}}>
@@ -46,8 +46,13 @@ class MyProfile extends Component {
 				              	<Icon active name="home"/>
 				              	<Body>
 				              	<View style={{flexDirection: 'column', marginLeft : 10}}>
-				              		<Text style={{fontSize : 13, color : 'grey'}}>Location</Text>
-						            <Text>Tangerang Selatan - Bintaro</Text>
+												<Text style={{fontSize : 13, color : 'grey'}}>Location</Text>
+												<TouchableOpacity onPress={() => this.props.navigation.navigate("LocationA")}>
+												<Text style={{marginTop : 5}}>
+															Tangerang Selatan, Bintaro
+												</Text>
+												</TouchableOpacity>
+
 				              	</View>
 				              	</Body>
 				            </View>
@@ -82,7 +87,7 @@ class MyProfile extends Component {
 			                </ListItem>
 			                <ListItem noBorder>
 			                  <Text>
-			                    1. Confirms project requirements by reviewing program objective, input data, and output 
+			                    1. Confirms project requirements by reviewing program objective, input data, and output
 			                    requirements with analyst, supervisor, and client.
 			                  </Text>
 			                </ListItem>
