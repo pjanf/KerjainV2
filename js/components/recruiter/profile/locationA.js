@@ -22,6 +22,8 @@ class LocationA extends Component {
       w:"cd",
       coords:[],
       x: null,
+      cordLatitude: -6.111,
+      cordLongitude: 106.23,
       markers: [{
         title: 'Office Location',
         coordinates: {
@@ -54,7 +56,7 @@ class LocationA extends Component {
   mergeLot(){
      if (this.state.latitude != null && this.state.longitude!=null)
      {
-       let concatLot = this.state.latitude +","+this.state.longitude
+       let concatLot = "'"+this.state.latitude +","+this.state.longitude+"'"
        this.getDirections(concatLot, "-6.111,106.23")
      }
    }
@@ -82,10 +84,9 @@ class LocationA extends Component {
   render() {
     return (
 
-
       <MapView style={styles.map} initialRegion={{
-       latitude:41,
-       longitude:28,
+       latitude:-6,
+       longitude:106,
        latitudeDelta: 1,
        longitudeDelta: 1
      }}>
@@ -106,14 +107,17 @@ class LocationA extends Component {
 
        ))}
 
-       {!!this.state.latitude && !!this.state.longitude && this.state.x=="true"&&
-         <MapView.Polyline
-            coordinates={this.state.coords}
-            strokeWidth={2}
-            strokeColor="red"/>
-       }
+      {!!this.state.latitude && !!this.state.longitude && <MapView.Polyline
+          coordinates={[
+              {latitude: this.state.latitude, longitude: this.state.longitude}, // optional
+              {latitude: this.state.cordLatitude, longitude: this.state.cordLongitude}, // optional
+          ]}
+          strokeWidth={4}
+      />}
 
      </MapView>
+
+
 
     );
   }

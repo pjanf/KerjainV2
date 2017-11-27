@@ -62,7 +62,7 @@ class Login extends Component {
 					</View>
 					<View style={styles.footer}>
 							<Text style={{ textAlign: 'center', color:'#FFF', fontSize: 13  }}>
-								Don't have a SunFish Talent account?
+								Don't have a Kerja.In Talent account?
 							</Text>
 							<TouchableOpacity onPress={()=> {
 								alert('Company Registration')

@@ -27,7 +27,7 @@ class Home extends Component {
 						</Button>
 					</Left>
 					<Body>
-						<Title>SunFish Recruiter</Title>
+						<Title>Kerja.In Recruiter</Title>
 					</Body>
 				</Header>
 				<Tabs tabBarUnderlineStyle= {{ backgroundColor:'#d35400' }} renderTabBar={()=> <ScrollableTab />}>

@@ -11,7 +11,7 @@ class Register extends Component {
 	render() {
 		const {goBack} = this.props.navigation;
 		return (
-			<Container style={styles.container}>			
+			<Container style={styles.container}>
 				<Header style={{ backgroundColor:'#189DAE' }}>
 					<Left>
 					<Button
@@ -22,7 +22,7 @@ class Register extends Component {
 					</Button>
 					</Left>
 					<Body>
-						<Title> Sunfish Talent</Title>
+						<Title> Kerja.In Talent</Title>
 					</Body>
 				</Header>
 				<Content style={styles.content}>
@@ -43,7 +43,7 @@ class Register extends Component {
 			        		<Text>             Submit             </Text>
 			        	</Button>
 				    </Card>
-		        	
+
 				</Content>
 			</Container>
 		);

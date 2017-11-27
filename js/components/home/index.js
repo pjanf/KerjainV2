@@ -58,7 +58,7 @@ class Home extends Component {
 						</Button>
 					</Left>
 					<Body>
-						<Title>SunFish Talent</Title>
+						<Title>Kerja.In Talent</Title>
 					</Body>
 					<Right>
 		            	<Button transparent active badge horizontal onPress={() => this.props.navigation.navigate("Notification")}>
