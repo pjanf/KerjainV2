@@ -61,6 +61,21 @@ let favs = realm.objects('Education1')
 const drawerImage = require("../../../../img/companyLogo/dataon.jpg");
 const companyImage = require("../../../../img/company/dataon/112116_NBC_1.jpg");
 
+const datas = [
+  {
+    instituteName: 'Binus University',
+    graduation: '22 Sept 2013',
+    degree: 'S1',
+    major: 'Information Technology',
+  },
+  {
+    instituteName: 'Gunadarma University',
+    graduation: '17 Jun 2017',
+    degree: 'S2',
+    major: 'Information Technology',
+  },
+];
+
 export default class Tes extends Component {
     constructor(props) {
         super(props);
@@ -81,87 +96,72 @@ export default class Tes extends Component {
         };
     }
 
-          _deleteItem (title) {
-            let itemToDelete = favs.filtered('title = $0', title)
+          _deleteItem (school) {
+            let itemToDelete = favs.filtered('school = $0', school)
             realm.write(() => {
               realm.delete(itemToDelete)
             })
             this.forceUpdate()
           }
-
-  render() {
-    let favorites = _.map(favs, (f, i) => {
-      return (
-          <Card>
-              <CardItem key={i}>
-                <View style={{ flex:1, flexDirection:'column' }}>
-                    <View style={{ flex:2, flexDirection:'row', marginBottom:10 }}>
-                        <Text style={{ flex:1, fontSize:16, fontFamily:'Roboto', color:'#d35400' }}>{f.school}</Text>
-                        <Text style={{ flex:1, fontSize:16, fontFamily:'Roboto', color:'#d35400' }}>{f.degree}</Text>
-                        <Text style={{ flex:1, fontSize:16, fontFamily:'Roboto', color:'#d35400' }}>{f.major}</Text>
-                        <TouchableOpacity style={{flex:1, height:28, left:135}}
-                          onPress={() => Alert.alert(
-                                'Confirmation',
-                                'Do you really want to delete?',
-                                [
-                                {text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
-                                {text: 'OK', onPress: () => this._deleteItem(f.school)},
-                                ]
-                            )}
-                          underlayColor='transparent'>
-                           <Icon name='md-trash' />
+  render() { // eslint-disable-line
+      let favorites = _.map(favs, (f, i) => {
+          return (
+            <CardItem key={i} style={{marginTop : 5, marginBottom : 5, paddingBottom : 10}}>
+                <Body>
+                    <View style={{flexDirection : 'row', flex : 6}}>
+                        <TouchableOpacity style={{flex : 5}}>
+                          <Text style={{fontSize: 18, color : '#189DAE'}}>{f.school}</Text>
                         </TouchableOpacity>
+                        <Right>
+                            <TouchableOpacity
+                                onPress={() => Alert.alert(
+                                    'Confirmation',
+                                    'Do you really want to delete?',
+                                    [
+                                    {text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
+                                    {text: 'OK', onPress: () => this._deleteItem(f.school)},
+                                    ]
+                                )}>
+                                     <Icon active name="remove-circle" style={{flex : 1, color : 'blue'}} />
+                            </TouchableOpacity>
+                        </Right>
                     </View>
-                    <Text style={{ fontSize:12, fontFamily:'Roboto', color:'#a19c9c' }}>Posted: 11 Agustus 2017</Text>
-                    <View style={{ flex:1, flexDirection:'row', margin:0, padding:0 }}>
-                        <Button button small transparent style={{ height:35, paddingLeft:0 }} onPress={() => this.props.navigation.navigate("ScheduleI")}>
-                            <Badge warning>
-                                <Text style={{ fontSize:12 }}>1</Text>
-                            </Badge>
-                            <Text style={{ fontSize:10, paddingLeft:5, color:'#d35400' }}>Unproccesed</Text>
-                        </Button>
-                        <Button button small transparent style={{paddingLeft: 5, paddingRight:5, height:35 }} onPress={() => this.props.navigation.navigate("ScheduleS")}>
-                            <Badge info>
-                                <Text style={{ fontSize:12 }} >5</Text>
-                            </Badge>
-                            <Text style={{ fontSize: 10, paddingLeft:5, color:'#d35400' }}>Shortlist</Text>
-                        </Button>
-                        <Button small transparent style={{ height:35  }} onPress={() => this.props.navigation.navigate("Schedule")}>
-                            <Badge success>
-                                <Text style={{ fontSize:12 }} >6</Text>
-                            </Badge>
-                            <Text style={{ fontSize: 10, paddingLeft:5, color:'#d35400' }}>Interview</Text>
-                        </Button>
+                    <View>
+                        <Text style={{fontSize : 15, marginTop : 10, color : 'grey'}}>Graduation</Text>
+                        <Text style={{marginTop : 5}}>10 Februari 2018</Text>
+
+                        <Text style={{fontSize : 15, marginTop : 10, color : 'grey'}}>Degree</Text>
+                        <Text style={{marginTop : 5}}>{f.degree}</Text>
+
+                        <Text style={{fontSize : 15, marginTop : 10, color : 'grey'}}>Major</Text>
+                        <Text style={{marginTop : 5}}>{f.major}</Text>
                     </View>
-                </View>
+                </Body>
             </CardItem>
-         </Card>
-      )
-    })
-    return (
-        <Container style={styles.container}>
-        <Header style={{ backgroundColor:'#d35400' }}>
-            <StatusBar barStyle="light-content" backgroundColor='#d35400' />
-            <Left>
-                <Button transparent onPress={() => this.props.navigation.navigate("MenuBarRecruiter")}>
-                    <Icon name="menu" />
-                </Button>
-            </Left>
-            <Body><Title>Kerja.In Offical Testing Page</Title></Body>
-        </Header>
-        <Content style={{ backgroundColor:'#f0f0f0', padding:10 }}>
-        <View>
-            <Right>
-                <Button transparent bordered danger style= {{marginLeft : 260, marginBottom : 10}} onPress={() => this.props.navigation.navigate("JobsPostingAdd")}>
-                    <Icon name='add' />
-              </Button>
-            </Right>
-        </View>
-        <View>
-          {favorites}
-        </View>
-        </Content>
+          )
+      })
+
+      return (
+      <Container style={styles.container}>
+            <Content style={styles.content}>
+                <Card bordered style={{backgroundColor : '#E0E0E0', paddingLeft : 10, paddingRight : 10}}>
+                <View style={{flexDirection : 'row', marginTop : 10, marginBottom : 20}}>
+                    <Icon name="school"/>
+                    <Text style={{marginLeft: 10, marginTop : 5, color : '#189DAE', fontSize : 17}}>Education</Text>
+                    <Right>
+                      <Button iconLeft info onPress={() => this.props.navigation.navigate("EducationAdd")} style={{marginLeft : 220}}>
+                          <Icon active name="add" style={{color : 'white'}}/>
+                      </Button>
+                    </Right>
+
+                  </View>
+                  <View>
+                      {favorites}
+                  </View>
+                </Card>
+
+            </Content>
         </Container>
-    )
-  }
+      )
+    }
 }

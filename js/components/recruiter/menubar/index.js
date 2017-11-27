@@ -85,7 +85,9 @@ export default class Menubar extends Component {
             <ListItem button style={styles.listItem}>
               <Left>
                 <Icon name="camera" style={styles.mnuIcon}/>             
-                <Text style={styles.mnuItem}>Share Interview</Text>              
+                <TouchableOpacity  onPress={() => this.props.navigation.navigate("Tes")}>
+                                  <Text style={styles.mnuItem}>Share Interview</Text>
+                                </TouchableOpacity>
               </Left>
             </ListItem>
             <ListItem button style={styles.listItem}>
