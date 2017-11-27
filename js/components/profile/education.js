@@ -7,6 +7,41 @@ import { Container, Content, Card, CardItem, Text, View, Body, List, ListItem, I
 
 import styles from './styles';
 
+const Realm = require ('realm');
+
+const WorkExperience= {
+    name: 'WorkExperience',
+    properties: {
+    companyName: 'string',
+    position: 'string',
+    description: 'string'
+    }
+};
+
+const Education1= {
+    name: 'Education1',
+    properties: {
+    school: 'string',
+    degree: 'string',
+    major: 'string'
+    }
+};
+
+const JobsPosting7 = {
+  name: 'JobsPosting7',
+  properties: {
+    title:     'string',
+    salary: 'string',
+    location: 'string',
+    description: 'string',
+    requirement: 'string'
+  }
+};
+
+let realm = new Realm({schema: [WorkExperience, JobsPosting7, Education1]});
+
+let favs = realm.objects('Education1')
+
 const datas = [
   {
     instituteName: 'Binus University',
@@ -22,52 +57,68 @@ const datas = [
   },
 ];
 
+
+
 export default class Education extends Component { // eslint-disable-line
 
-  render() { // eslint-disable-line
-    return (
-    	<Container style={styles.container}>
-      		<Content style={styles.content}>
-		      	<Card bordered style={{backgroundColor : '#E0E0E0', paddingLeft : 10, paddingRight : 10}}>
-		      	<View style={{flexDirection : 'row', marginTop : 10, marginBottom : 20}}>
-		      		<Icon name="school"/>
-		            <Text style={{marginLeft: 10, marginTop : 5, color : '#189DAE', fontSize : 17}}>Education</Text>
-		            <Right>
-		              <TouchableOpacity>
-		                <Icon name="add" style={{color : '#189DAE', marginRight : 10}}/>
-		              </TouchableOpacity>
-		            </Right>
-		          </View>
-					<List dataArray={datas} renderRow={(data) =>
-			          	<CardItem style={{marginTop : 5, marginBottom : 5, paddingBottom : 10}}>
-			           	 	<Body>
-			           	 		<View style={{flexDirection : 'row', flex : 6}}>
-					           	  	<TouchableOpacity style={{flex : 5}}>	
-						              <Text style={{fontSize: 18, color : '#189DAE'}}>{data.instituteName}</Text>
-						            </TouchableOpacity>
-							        <Right>
-							        	<TouchableOpacity>
-							        		 <Icon active name="remove-circle" style={{flex : 1, color : '#189DAE'}} />
-							        	</TouchableOpacity>
-							        </Right>
-					            </View>
-					            <View>
-						            <Text style={{fontSize : 15, marginTop : 10, color : 'grey'}}>Graduation</Text>
-						            <Text style={{marginTop : 5}}>{data.graduation}</Text>
+render() { // eslint-disable-line
+      let favorites = _.map(favs, (f, i) => {
+          return (
+            <CardItem key={i} style={{marginTop : 5, marginBottom : 5, paddingBottom : 10}}>
+                <Body>
+                    <View style={{flexDirection : 'row', flex : 6}}>
+                        <TouchableOpacity style={{flex : 5}}>
+                          <Text style={{fontSize: 18, color : '#189DAE'}}>{f.school}</Text>
+                        </TouchableOpacity>
+                        <Right>
+                            <TouchableOpacity
+                                onPress={() => Alert.alert(
+                                    'Confirmation',
+                                    'Do you really want to delete?',
+                                    [
+                                    {text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
+                                    {text: 'OK', onPress: () => this._deleteItem(f.school)},
+                                    ]
+                                )}>
+                                     <Icon active name="remove-circle" style={{flex : 1, color : 'blue'}} />
+                            </TouchableOpacity>
+                        </Right>
+                    </View>
+                    <View>
+                        <Text style={{fontSize : 15, marginTop : 10, color : 'grey'}}>Graduation</Text>
+                        <Text style={{marginTop : 5}}>10 Februari 2018</Text>
 
-						            <Text style={{fontSize : 15, marginTop : 10, color : 'grey'}}>Degree</Text>
-						            <Text style={{marginTop : 5}}>{data.degree}</Text>
+                        <Text style={{fontSize : 15, marginTop : 10, color : 'grey'}}>Degree</Text>
+                        <Text style={{marginTop : 5}}>{f.degree}</Text>
 
-						            <Text style={{fontSize : 15, marginTop : 10, color : 'grey'}}>Major</Text>
-						            <Text style={{marginTop : 5}}>{data.major}</Text>
-						        </View>
-			           		</Body>
-			          	</CardItem>
-			          }>
-			        </List>
-			    </Card>
-		    </Content>
-		</Container>
-    );
-  }
+                        <Text style={{fontSize : 15, marginTop : 10, color : 'grey'}}>Major</Text>
+                        <Text style={{marginTop : 5}}>{f.major}</Text>
+                    </View>
+                </Body>
+            </CardItem>
+          )
+      })
+
+      return (
+      <Container style={styles.container}>
+            <Content style={styles.content}>
+                <Card bordered style={{backgroundColor : '#E0E0E0', paddingLeft : 10, paddingRight : 10}}>
+                <View style={{flexDirection : 'row', marginTop : 10, marginBottom : 20}}>
+                    <Icon name="school"/>
+                    <Text style={{marginLeft: 10, marginTop : 5, color : '#189DAE', fontSize : 17}}>Education</Text>
+                    <Right>
+                      <Button iconLeft info onPress={() => this.props.navigation.navigate("EducationAdd")}>
+                          <Icon name="add" style={{color : '#FFFFFF'}}/>
+                      </Button>
+                    </Right>
+                  </View>
+                  <View>
+                      {favorites}
+                  </View>
+                </Card>
+
+            </Content>
+        </Container>
+      )
+    }
 }
