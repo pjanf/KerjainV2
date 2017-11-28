@@ -22,15 +22,15 @@ class LocationA extends Component {
       w:"cd",
       coords:[],
       x: null,
-      cordLatitude: -6.111,
-      cordLongitude: 106.23,
+      cordLatitude: -6.270565,
+      cordLongitude: 106.759550,
       markers: [{
         title: 'Office Location',
         coordinates: {
-          latitude: -6.111,
-          longitude: 106.23
+          latitude: -6.270565,
+          longitude: 106.759550
         },
-        description: 'Tangerang Selatan, Bintaro'
+        description: 'Bintaro, Tangerang Selatan'
       }
     ],
     };
@@ -57,7 +57,7 @@ class LocationA extends Component {
      if (this.state.latitude != null && this.state.longitude!=null)
      {
        let concatLot = "'"+this.state.latitude +","+this.state.longitude+"'"
-       this.getDirections(concatLot, "-6.111,106.23")
+       this.getDirections(concatLot, "-6.270565,106.759550")
      }
    }
 
@@ -85,8 +85,8 @@ class LocationA extends Component {
     return (
 
       <MapView style={styles.map} initialRegion={{
-       latitude:-6,
-       longitude:106,
+       latitude:-6.270565,
+       longitude:106.759550,
        latitudeDelta: 1,
        longitudeDelta: 1
      }}>
