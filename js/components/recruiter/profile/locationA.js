@@ -9,8 +9,6 @@ import Polyline from '@mapbox/polyline';
 
 
 class LocationA extends Component {
-	// eslint-disable-line
-
   constructor(props) {
     super(props);
 
@@ -18,12 +16,9 @@ class LocationA extends Component {
       latitude: null,
       longitude: null,
       error: null,
-      y:"ab",
-      w:"cd",
+      concat: null,
       coords:[],
-      x: null,
-      cordLatitude: -6.270565,
-      cordLongitude: 106.759550,
+      x: 'false',
       markers: [{
         title: 'Office Location',
         coordinates: {
@@ -34,11 +29,12 @@ class LocationA extends Component {
       }
     ],
     };
+
+    this.mergeLot = this.mergeLot.bind(this);
+    //::this.mergeLot;
   }
 
   componentDidMount() {
-
-
     navigator.geolocation.getCurrentPosition(
        (position) => {
          this.setState({
@@ -46,6 +42,7 @@ class LocationA extends Component {
            longitude: position.coords.longitude,
            error: null,
          });
+         this.mergeLot();
        },
        (error) => this.setState({ error: error.message }),
        { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 },
@@ -54,11 +51,18 @@ class LocationA extends Component {
    }
 
   mergeLot(){
-     if (this.state.latitude != null && this.state.longitude!=null)
+    console.log('masuk fungsi')
+    this.setState({x: "pos"});
+    if (this.state.latitude != null && this.state.longitude!=null)
      {
-       let concatLot = "'"+this.state.latitude +","+this.state.longitude+"'"
-       this.getDirections(concatLot, "-6.270565,106.759550")
+       let concatLot = this.state.latitude +","+this.state.longitude
+       this.setState({
+         concat: concatLot
+       }, () => {
+         this.getDirections(concatLot, "-6.270565,106.759550");
+       });
      }
+
    }
 
    async getDirections(startLoc, destinationLoc) {
@@ -77,11 +81,12 @@ class LocationA extends Component {
              this.setState({x: "true"})
              return coords
          } catch(error) {
-             alert(error)
+             alert(error + startLoc)
              return error
          }
      }
   render() {
+    //this.mergeLot();
     return (
 
       <MapView style={styles.map} initialRegion={{
@@ -89,12 +94,12 @@ class LocationA extends Component {
        longitude:106.759550,
        latitudeDelta: 1,
        longitudeDelta: 1
-     }}>
+      }}>
 
 
 
 
-     {!!this.state.latitude && !!this.state.longitude && <MapView.Marker
+      {!!this.state.latitude && !!this.state.longitude && <MapView.Marker
          coordinate={{"latitude":this.state.latitude,"longitude":this.state.longitude}}
          title={"Your Location"}
        />}
@@ -107,16 +112,17 @@ class LocationA extends Component {
 
        ))}
 
-      {!!this.state.latitude && !!this.state.longitude && <MapView.Polyline
-          coordinates={[
-              {latitude: this.state.latitude, longitude: this.state.longitude}, // optional
-              {latitude: this.state.cordLatitude, longitude: this.state.cordLongitude}, // optional
-          ]}
-          strokeWidth={4}
-      />}
+       {!!this.state.latitude && !!this.state.longitude && this.state.x == 'true' && <MapView.Polyline
+            coordinates={this.state.coords}
+            strokeWidth={2}
+            strokeColor="red"/>
 
-     </MapView>
+        }
 
+
+
+
+      </MapView>
 
 
     );
