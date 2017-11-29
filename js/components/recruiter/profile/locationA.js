@@ -83,7 +83,6 @@ class LocationA extends Component {
              this.setState({x: "true"})
              return coords
          } catch(error) {
-           console.log('masuk fungsi')
              this.setState({x: "error"})
              return error
          }
