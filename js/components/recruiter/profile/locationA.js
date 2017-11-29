@@ -19,6 +19,8 @@ class LocationA extends Component {
       concat: null,
       coords:[],
       x: 'false',
+      cordLatitude:6.23,
+      cordLongitude:106.75,
       markers: [{
         title: 'Office Location',
         coordinates: {
@@ -51,7 +53,7 @@ class LocationA extends Component {
    }
 
   mergeLot(){
-    console.log('masuk fungsi')
+
     this.setState({x: "pos"});
     if (this.state.latitude != null && this.state.longitude!=null)
      {
@@ -59,7 +61,7 @@ class LocationA extends Component {
        this.setState({
          concat: concatLot
        }, () => {
-         this.getDirections(concatLot, "-6.270565,106.759550");
+         this.getDirections(concatLot, "6.270565,106.759550");
        });
      }
 
@@ -81,14 +83,14 @@ class LocationA extends Component {
              this.setState({x: "true"})
              return coords
          } catch(error) {
-             alert(error + startLoc)
+           console.log('masuk fungsi')
+             this.setState({x: "error"})
              return error
          }
      }
   render() {
-    //this.mergeLot();
-    return (
 
+    return (
       <MapView style={styles.map} initialRegion={{
        latitude:-6.270565,
        longitude:106.759550,
@@ -96,13 +98,11 @@ class LocationA extends Component {
        longitudeDelta: 1
       }}>
 
-
-
-
       {!!this.state.latitude && !!this.state.longitude && <MapView.Marker
          coordinate={{"latitude":this.state.latitude,"longitude":this.state.longitude}}
          title={"Your Location"}
        />}
+
        {this.state.markers.map(marker=>(
          <MapView.Marker
            coordinate={marker.coordinates}
@@ -116,15 +116,17 @@ class LocationA extends Component {
             coordinates={this.state.coords}
             strokeWidth={2}
             strokeColor="red"/>
-
         }
 
-
-
-
+        {!!this.state.latitude && !!this.state.longitude && this.state.x == 'error' && <MapView.Polyline
+          coordinates={[
+              {latitude: this.state.latitude, longitude: this.state.longitude},
+              {latitude: this.state.cordLatitude, longitude: this.state.cordLongitude},
+          ]}
+          strokeWidth={2}
+          strokeColor="red"/>
+         }
       </MapView>
-
-
     );
   }
 }
