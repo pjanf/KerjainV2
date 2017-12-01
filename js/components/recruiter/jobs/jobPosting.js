@@ -6,6 +6,7 @@ import { Image, StatusBar, TouchableOpacity, ScrollView, TextInput, TouchableHig
 import { Container, Content, Card, CardItem, Text, View, Body, List, ListItem, Icon, Right, Button, Label, Form, Input, Item } from 'native-base';
 
 import DatePicker from 'react-native-datepicker'
+import RNGooglePlaces from 'react-native-google-places';
 
 import styles from './style';
 
@@ -48,7 +49,7 @@ export default class PersonalInfo extends Component { // eslint-disable-line
 
   constructor(props) {
     super(props);
-    this.state = {    
+    this.state = {
         postjobs:'',
         realm: null,
         title: '',
@@ -65,9 +66,8 @@ export default class PersonalInfo extends Component { // eslint-disable-line
   _updateSalary (salary) {
     this.setState({ salary })
   }
-  _updateLocation (location) {
-    this.setState({ location })
-  }
+
+
   _updateDescription (description) {
     this.setState({ description })
   }
@@ -85,6 +85,25 @@ export default class PersonalInfo extends Component { // eslint-disable-line
     this.props.navigation.navigate("JobsPosting")
   }
 
+  openSearchModal() {
+    RNGooglePlaces.openPlacePickerModal({
+
+	  latitude: 53.544389,
+	  longitude: -113.490927,
+	  radius: 0.01
+    })
+    .then((place) => {
+      console.log(place);
+  		this.setState({
+        latitude: place.latitude,
+        longitude: place.longitude,
+        location: place.address
+      })
+    })
+    .catch(error => console.log(error.message));  // error is a Javascript Error object
+  }
+
+
   render () {
     return (
       <Container style={styles.container}>
@@ -94,33 +113,37 @@ export default class PersonalInfo extends Component { // eslint-disable-line
               <CardItem>
                 <Form>
                     <Item>
-                      <Input placeholder = "Job's  Title" style={{fontSize:13}} 
+                      <Input placeholder = "Job's  Title" style={{fontSize:13}}
                         value={this.state.title}
-                        onChangeText={(text) => this._updateTitle(text)}  
+                        onChangeText={(text) => this._updateTitle(text)}
                        />
                     </Item>
                     <Item>
-                      <Input placeholder = "Salary" style={{fontSize:13}} 
+                      <Input placeholder = "Salary" style={{fontSize:13}}
                         value={this.state.salary}
                         onChangeText={(text) => this._updateSalary(text)}
                        />
                     </Item>
                     <Item>
-                      <Input placeholder = "Location" style={{fontSize:13}} 
-                        value={this.state.location}
-                        onChangeText={(text) => this._updateLocation(text)}
-                       />
+
+                    <TouchableOpacity
+                      onPress={() => this.openSearchModal()}
+                    >
+                      <Text style={{ fontSize:12, marginTop:20, marginLeft : 6 }}>Location</Text>
+                      <Text style={{ fontSize:14, marginTop:10, marginLeft : 10 }}> {this.state.location} </Text>
+                    </TouchableOpacity>
+
                     </Item>
                     <Item>
-                      <Input placeholder = "Description" style={{fontSize:13}} 
+                      <Input placeholder = "Description" style={{fontSize:13}}
                         value={this.state.description}
-                        onChangeText={(text) => this._updateDescription(text)}  
+                        onChangeText={(text) => this._updateDescription(text)}
                        />
                     </Item>
                     <Item>
-                      <Input placeholder = "Requirement" style={{fontSize:13}} 
+                      <Input placeholder = "Requirement" style={{fontSize:13}}
                         value={this.state.requirement}
-                        onChangeText={(text) => this._updateRequirement(text)}  
+                        onChangeText={(text) => this._updateRequirement(text)}
                        />
                     </Item>
                     <Text style={{ fontSize:12, marginTop:20, marginLeft : 20 }}>Date Closed</Text>
