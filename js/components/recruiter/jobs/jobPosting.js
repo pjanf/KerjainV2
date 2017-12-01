@@ -30,20 +30,22 @@ const Education1= {
     }
 };
 
-const JobsPosting7 = {
-  name: 'JobsPosting7',
+const JobsPosting8 = {
+  name: 'JobsPosting8',
   properties: {
     title:     'string',
     salary: 'string',
     location: 'string',
+    latitude: 'double',
+    longitude:'double',
     description: 'string',
     requirement: 'string'
   }
 };
 
-let realm = new Realm({schema: [WorkExperience, JobsPosting7, Education1]});
+let realm = new Realm({schema: [WorkExperience, JobsPosting8, Education1]});
 
-let favs = realm.objects('JobsPosting7')
+let favs = realm.objects('JobsPosting8')
 
 export default class PersonalInfo extends Component { // eslint-disable-line
 
@@ -56,7 +58,9 @@ export default class PersonalInfo extends Component { // eslint-disable-line
         salary: '',
         location: '',
         description: '',
-        requirement: ''
+        requirement: '',
+        latitude:'',
+        longitude:'',
     };
   }
 
@@ -78,8 +82,8 @@ export default class PersonalInfo extends Component { // eslint-disable-line
   _addItem () {
     if (this.state.title === '') return
       realm.write(() => {
-      realm.create('JobsPosting7', { title: this.state.title, salary: this.state.salary, location: this.state.location,
-        description: this.state.description, requirement:this.state.requirement})
+      realm.create('JobsPosting8', { title: this.state.title, salary: this.state.salary, location: this.state.location,
+        latitude: this.state.latitude, longitude: this.state.longitude, description: this.state.description, requirement:this.state.requirement})
     })
     this.setState({ title: '', salary: '', location: '', description: '', requirement: ''}),
     this.props.navigation.navigate("JobsPosting")

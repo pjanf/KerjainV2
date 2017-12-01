@@ -27,18 +27,20 @@ const Education1= {
     }
 };
 
-const JobsPosting7 = {
-  name: 'JobsPosting7',
+const JobsPosting8 = {
+  name: 'JobsPosting8',
   properties: {
     title:     'string',
     salary: 'string',
     location: 'string',
+    latitude: 'double',
+    longitude:'double',
     description: 'string',
     requirement: 'string'
   }
 };
 
-let realm = new Realm({schema: [WorkExperience, JobsPosting7, Education1]});
+let realm = new Realm({schema: [WorkExperience, JobsPosting8, Education1]});
 
 let favs = realm.objects('WorkExperience')
 
@@ -79,7 +81,7 @@ class Register extends Component {
 	render() {
 		const {goBack} = this.props.navigation;
 		return (
-			<Container style={styles.container}>			
+			<Container style={styles.container}>
 				<Header style={{ backgroundColor:'#189DAE' }}>
 					<Button
 						transparent
@@ -91,7 +93,7 @@ class Register extends Component {
 					<Right>
 						<Title style={{marginLeft : 10}}> STEP 2 of 3</Title>
 					</Right>
-					
+
 				</Header>
 				<Content style={styles.content}>
 					<StatusBar barStyle="light-content" backgroundColor='#189DAE' />
