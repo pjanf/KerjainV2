@@ -32,7 +32,7 @@ class LocationA extends Component {
     ],
     };
 
-    this.mergeLot = this.mergeLot.bind(this);
+  //  this.mergeLot = this.mergeLot.bind(this);
     //::this.mergeLot;
   }
 
@@ -44,7 +44,7 @@ class LocationA extends Component {
            longitude: position.coords.longitude,
            error: null,
          });
-         this.mergeLot();
+         this.mergeLot.bind(this);
        },
        (error) => this.setState({ error: error.message }),
        { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 },

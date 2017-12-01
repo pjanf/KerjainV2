@@ -43,6 +43,7 @@ import CompanyProfile from "./components/recruiter/profile/";
 import CompanyDetail from "./components/recruiter/profile/companyDetail";
 import CompanyVideo from "./components/recruiter/profile/companyVideo";
 import LocationA from "./components/recruiter/profile/locationA";
+import LocationB from "./components/recruiter/profile/locationB";
 import Schedule from "./components/recruiter/schedule/index";
 import ScheduleI from "./components/recruiter/schedule/indexI";
 import ScheduleS from "./components/recruiter/schedule/indexS";
@@ -85,6 +86,7 @@ const AppNavigator = StackNavigator(
         CompanyProfile: { screen: CompanyProfile },
         CompanyDetail: { screen: CompanyDetail },
         LocationA: { screen: LocationA },
+        LocationB: { screen: LocationB },
         CompanyVideo: { screen: CompanyVideo },
         Schedule  : { screen: Schedule },
         ScheduleI  : { screen: ScheduleI },
