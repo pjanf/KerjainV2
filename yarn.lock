@@ -3626,6 +3626,10 @@ react-native-fs@^2.8.5:
     base-64 "^0.1.0"
     utf8 "^2.1.1"
 
+react-native-google-places@2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-google-places/-/react-native-google-places-2.4.0.tgz#4c7bf59cd9380e5eb7ec12e63addf81b0229b85c"
+
 "react-native-keyboard-aware-scroll-view@https://github.com/GeekyAnts/react-native-keyboard-aware-scroll-view":
   version "0.2.9"
   resolved "https://github.com/GeekyAnts/react-native-keyboard-aware-scroll-view#f4805f254d6cc8e3329f5fb224944401f66655db"
