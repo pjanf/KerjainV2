@@ -139,17 +139,21 @@ export default class Jobs extends Component {
                 </Left>
                 <Body><Title>Job List</Title></Body>
                 <Right>
-                    <Button transparent bordered danger style= {{marginLeft : 260, marginBottom : 10}} onPress={() => this.props.navigation.navigate("JobsPostingAdd")}>
-                        <Icon name='add' />
-                  </Button>
+
+                    <Button transparent onPress={() => this.props.navigation.navigate("JobsPostingAdd")}>
+                        <Icon name="add" />
+                    </Button>
+
                 </Right>
             </Header>
             <Content style={{ backgroundColor:'#f0f0f0', padding:10 }}>
 
             <View>
               {favorites}
+
             </View>
             </Content>
+
         </Container>
     )
   }
