@@ -7,11 +7,48 @@ import styles from "./styles";
 
 const cover = require('../../../img/contacts/sankhadeep.png');
 
+const Realm = require ('realm');
+
+const WorkExperience= {
+    name: 'WorkExperience',
+    properties: {
+    companyName: 'string',
+    position: 'string',
+    description: 'string'
+    }
+};
+
+const Education1= {
+    name: 'Education1',
+    properties: {
+    school: 'string',
+    degree: 'string',
+    major: 'string'
+    }
+};
+
+const JobsPosting8 = {
+  name: 'JobsPosting8',
+  properties: {
+    title:     'string',
+    salary: 'string',
+    location: 'string',
+    latitude: 'double',
+    longitude:'double',
+    description: 'string',
+    requirement: 'string'
+  }
+};
+let realm = new Realm({schema: [WorkExperience, JobsPosting8, Education1]});
+
+let favs = realm.objects('JobsPosting8');
+
 class MyProfile extends Component {
 	// eslint-disable-line
 
 	render() {
 		const {goBack} = this.props.navigation;
+		let item = favs.filtered('title = $0', this.props.navigation.state.params.title)[0];
 		return (
 			<Container style={styles.container}>
 				<Header style={{ backgroundColor:'#189DAE' }}>
@@ -36,7 +73,7 @@ class MyProfile extends Component {
 				              	<Body>
 				              	<View style={{flexDirection: 'column', marginLeft : 10}}>
 				              		<Text style={{fontSize : 13, color : 'grey'}}>Job Position</Text>
-						            <Text>Software Developer</Text>
+						            <Text>{item.title}</Text>
 				              	</View>
 				              	</Body>
 				            </View>
@@ -47,9 +84,9 @@ class MyProfile extends Component {
 				              	<Body>
 				              	<View style={{flexDirection: 'column', marginLeft : 10}}>
 												<Text style={{fontSize : 13, color : 'grey'}}>Location</Text>
-												<TouchableOpacity onPress={() => this.props.navigation.navigate("LocationA")}>
+												<TouchableOpacity onPress={() => this.props.navigation.navigate("LocationA", { title: item.title } )}>
 												<Text style={{marginTop : 5}}>
-															Tangerang Selatan, Bintaro
+															{item.location}
 												</Text>
 												</TouchableOpacity>
 
@@ -63,7 +100,7 @@ class MyProfile extends Component {
 				              	<Body>
 				              	<View style={{flexDirection: 'column', marginLeft : 10}}>
 				              		<Text style={{fontSize : 13, color : 'grey'}}>Salary</Text>
-						            <Text>Above Expected Salary</Text>
+						            <Text>{item.salary}</Text>
 				              	</View>
 				              	</Body>
 				            </View>
@@ -87,44 +124,20 @@ class MyProfile extends Component {
 			                </ListItem>
 			                <ListItem noBorder>
 			                  <Text>
-			                    1. Confirms project requirements by reviewing program objective, input data, and output
-			                    requirements with analyst, supervisor, and client.
-			                  </Text>
-			                </ListItem>
-			                <ListItem noBorder>
-			                  <Text>
-			                    2. Program the computer by entering coded information.
-			                  </Text>
-			                </ListItem>
-			                <ListItem noBorder>
-			                  <Text>
-			                    3. Confirms program operation by conducting tests; modifying program sequences and/or codes
+			                   {item.description}
 			                  </Text>
 			                </ListItem>
 
+
 			                <ListItem itemDivider>
-			                  <Text style={{color : '#189DAE', fontSize : 20}}>Skill Requirement</Text>
+			                  <Text style={{color : '#189DAE', fontSize : 20}}>Requirement</Text>
 			                </ListItem>
 			                <ListItem noBorder>
 			                  <Text>
-			                    1. Have programming skill in Java.
+			                   {item.requirement}
 			                  </Text>
 			                </ListItem>
-			                <ListItem noBorder>
-			                  <Text>
-			                    2. Have knowledge in object-oriented programming.
-			                  </Text>
-			                </ListItem>
-			                <ListItem noBorder>
-			                  <Text>
-			                    3. Have knowledge in databases such as MYSQL, SQL Server, Oracle, PostgreSQL.
-			                  </Text>
-			                </ListItem>
-			                <ListItem noBorder>
-			                  <Text>
-			                    4. Have knowledge in HTML, JavaScript, CSS.
-			                  </Text>
-			                </ListItem>
+
 			            </View>
 		        	</View>
 			        <Button rounded info style={{marginTop : 15, marginBottom : 20, alignSelf : 'center', height : 50}}

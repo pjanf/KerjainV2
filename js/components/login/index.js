@@ -59,7 +59,7 @@ class Login extends Component {
 						<Button full rounded style={{
 							marginBottom:25,
 							backgroundColor:'#189DAE' }}
-						onPress={() => this.props.navigation.navigate("Home")}
+						onPress={() => this.props.navigation.navigate('Home')}
 						>
 							<Text>Sign In</Text>
 						</Button>
