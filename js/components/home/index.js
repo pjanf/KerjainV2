@@ -9,6 +9,7 @@ import styles from "./styles";
 import JobAlert from './jobAlert';
 import Notification from './notification';
 
+const dataon = require('../../../img/companyLogo/dataon.jpg');
 
 const Realm = require ('realm');
 
@@ -46,8 +47,6 @@ let realm = new Realm({schema: [WorkExperience, JobsPosting8, Education1]});
 
 let favs = realm.objects('JobsPosting8');
 
-const dataon = require('../../../img/companyLogo/dataon.jpg');
-
 
 class Home extends Component {
 	// eslint-disable-line
@@ -65,66 +64,91 @@ class Home extends Component {
   }
 
     render() {
-        let favorites = _.map(favs, (f, i) => {
+
           return (
-            <Card>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('JobDetail', { title:f.title } )}>
-                <CardItem key={i}>
-
-                  <View style={{ flex:1, flexDirection:'column' }}>
-                      <View style={{ flex:2, flexDirection:'row', marginBottom:10 }}>
-                          <Text style={{ flex:1, fontSize:16, fontFamily:'Roboto', color:'#d35400' }}>{f.title}</Text>
-                      </View>
-                  </View>
-
-              </CardItem>
-              </TouchableOpacity>
-           </Card>
-          )
-        })
-
-      return (
-        <Container style={styles.container}>
-        <StatusBar barStyle="light-content" backgroundColor='#189DAE' />
-      <Header style={{ backgroundColor:'#189DAE' }} hasTabs>
-        <Left>
-          <Button
-          transparent
-          onPress={() => this.props.navigation.navigate("DrawerOpen")}
-          >
-          <Icon name="menu" />
-          </Button>
-        </Left>
-        <Body>
-          <Title>Kerja.In Talent</Title>
-        </Body>
-        <Right>
-                <Button transparent active badge horizontal onPress={() => this.props.navigation.navigate("Notification")}>
-                  <Icon active name="notifications" />
-                  <Badge info style = {{height : 20}}><Text style={{fontSize : 12, lineHeight : 14}}>3</Text></Badge>
+          <Container style={styles.container}>
+          <StatusBar barStyle="light-content" backgroundColor='#189DAE' />
+            <Header style={{ backgroundColor:'#189DAE' }} hasTabs>
+              <Left>
+                <Button
+                transparent
+                onPress={() => this.props.navigation.navigate("DrawerOpen")}
+                >
+                <Icon name="menu" />
                 </Button>
-        </Right>
-      </Header>
-
-      <Content style={{backgroundColor : '#E0E0E0'}}>
-          <View style={{height : 500}}>
-            <View style={{flexDirection : 'row', marginBottom : 20, marginTop : 20}}>
-              <Text style={{color : '#189DAE', fontSize : 18}}> Trending Jobs </Text>
+              </Left>
+              <Body>
+                <Title>Kerja.In Talent</Title>
+              </Body>
               <Right>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate("JobSearch")}>
-                  <Icon name="search" style={{marginRight : 30, color : '#189DAE'}}/>
-                </TouchableOpacity>
+                      <Button transparent active badge horizontal onPress={() => this.props.navigation.navigate("Notification")}>
+                        <Icon active name="notifications" />
+                        <Badge info style = {{height : 20}}><Text style={{fontSize : 12, lineHeight : 14}}>3</Text></Badge>
+                      </Button>
               </Right>
-            </View>
-          </View>
-      </Content>
-      <Content>
-        <View>
-          {favorites}
-        </View>
-      </Content>
-    </Container>
+            </Header>
+            <View style={{height : 500}}>
+                <View style={{flexDirection : 'row', marginBottom : 20, marginTop : 20}}>
+                  <Text style={{color : '#189DAE', fontSize : 18}}> Trending Jobs </Text>
+                  <Right>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate("JobSearch")}>
+                      <Icon name="search" style={{marginRight : 30, color : '#189DAE'}}/>
+                    </TouchableOpacity>
+                  </Right>
+                </View>
+                <View>
+                <DeckSwiper
+                    ref={(c) => this._deckSwiper = c}
+                    dataSource={favs}
+                    renderEmpty={() =>
+                      <View style={{ alignSelf: "center" }}>
+                        <Text>Over</Text>
+                      </View>
+                    }
+                    renderItem={f =>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('JobDetail', { title:f.title } )}>
+                      <Card style={{ elevation: 3, marginBottom : 20, marginRight : 20, marginLeft : 20}}>
+                        <View style={{alignItems : 'center'}}>
+                          <CardItem>
 
+                                <Thumbnail large source={dataon} style={{height : 60, width : 100}} />
+
+                          </CardItem>
+                          <CardItem>
+                            <View style={{alignItems : 'center'}}>
+                                <Text style={{fontSize : 20, color : '#189DAE'}}>PT DataOn Corporation</Text>
+                                <View style={{flexDirection : 'row', marginTop: 20}}>
+                                  <Icon name="briefcase"/>
+                                  <Text>  {f.title}</Text>
+                                </View>
+                                <View style={{flexDirection : 'row'}}>
+                                  <Icon name="cash"/>
+                                  <Text>  {f.salary}</Text>
+                                </View>
+                                <View style={{flexDirection : 'row', marginTop: 20}}>
+                                  <Icon name="pin"/>
+                                  <Text>  {f.location}</Text>
+                                </View>
+                            </View>
+                          </CardItem>
+                          <CardItem style={{backgroundColor : '#ecf0f1'}}>
+                            <View style={{flexDirection : 'row', flex : 2, alignItems : 'center'}}>
+                              <Button info style={{flex : 1, marginRight : 5, marginLeft : 5}} onPress={() => this._deckSwiper._root.swipeRight()}>
+                                <Text style={{fontSize : 12}}> Not Interested</Text>
+                              </Button>
+                              <Button info style={{flex : 1, marginRight : 5, marginLeft : 5}}>
+                                <Text style={{fontSize : 12}}>           Apply</Text>
+                              </Button>
+                            </View>
+                          </CardItem>
+                        </View>
+                      </Card>
+                      </TouchableOpacity>
+                    }
+                />
+                </View>
+            </View>
+        </Container>
       )
     }
   }

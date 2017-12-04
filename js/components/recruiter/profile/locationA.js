@@ -56,6 +56,7 @@ class LocationA extends Component {
       x: 'false',
       cordLatitude:null,
       cordLongitude:null,
+      address:null,
       markers: [{
         title: 'Office Location',
         coordinates: {
@@ -77,6 +78,7 @@ class LocationA extends Component {
     this.setState({
       cordLatitude: item.latitude,
       cordLongitude: item.longitude,
+      address: item.location,
     }, () => {console.log(this.state.cordLatitude + " woye ")});
 
     navigator.geolocation.getCurrentPosition(
@@ -155,14 +157,13 @@ class LocationA extends Component {
          title={"Your Location"}
        />}
 
-       {this.state.markers.map(marker=>(
-         <MapView.Marker
-           coordinate={marker.coordinates}
-           title = {marker.title}
-           description = {marker.description}
-         />
+        {!!this.state.cordLatitude && !!this.state.cordLongitude && <MapView.Marker
+                 coordinate={{"latitude":this.state.cordLatitude,"longitude":this.state.cordLongitude}}
+                 title={"Office Location"}
+                 description = {this.state.address}
+         />}
 
-       ))}
+
 
        {!!this.state.latitude && !!this.state.longitude && this.state.x == 'true' && <MapView.Polyline
             coordinates={this.state.coords}
