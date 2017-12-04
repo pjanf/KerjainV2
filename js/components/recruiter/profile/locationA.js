@@ -7,6 +7,40 @@ import { Container, Content, Button, Text, Header, Title, Body, Left, Right, Ico
 import MapView from 'react-native-maps';
 import Polyline from '@mapbox/polyline';
 
+const Realm = require ('realm');
+
+const WorkExperience= {
+    name: 'WorkExperience',
+    properties: {
+    companyName: 'string',
+    position: 'string',
+    description: 'string'
+    }
+};
+
+const Education1= {
+    name: 'Education1',
+    properties: {
+    school: 'string',
+    degree: 'string',
+    major: 'string'
+    }
+};
+
+const JobsPosting8 = {
+  name: 'JobsPosting8',
+  properties: {
+    title:     'string',
+    salary: 'string',
+    location: 'string',
+    latitude: 'double',
+    longitude:'double',
+    description: 'string',
+    requirement: 'string'
+  }
+};
+let realm = new Realm({schema: [WorkExperience, JobsPosting8, Education1]});
+let favs = realm.objects('JobsPosting8');
 
 class LocationA extends Component {
   constructor(props) {
@@ -17,10 +51,11 @@ class LocationA extends Component {
       longitude: null,
       error: null,
       concat: null,
+      concatDest: null,
       coords:[],
       x: 'false',
-      cordLatitude:6.23,
-      cordLongitude:106.75,
+      cordLatitude:null,
+      cordLongitude:null,
       markers: [{
         title: 'Office Location',
         coordinates: {
@@ -32,11 +67,18 @@ class LocationA extends Component {
     ],
     };
 
-  //  this.mergeLot = this.mergeLot.bind(this);
+    this.mergeLot = this.mergeLot.bind(this);
     //::this.mergeLot;
   }
 
   componentDidMount() {
+    let item = favs.filtered('title = $0', this.props.navigation.state.params.title)[0];
+    console.log(item.latitude);
+    this.setState({
+      cordLatitude: item.latitude,
+      cordLongitude: item.longitude,
+    }, () => {console.log(this.state.cordLatitude + " woye ")});
+
     navigator.geolocation.getCurrentPosition(
        (position) => {
          this.setState({
@@ -44,26 +86,36 @@ class LocationA extends Component {
            longitude: position.coords.longitude,
            error: null,
          });
-         this.mergeLot.bind(this);
+         this.mergeLot();
        },
        (error) => this.setState({ error: error.message }),
        { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 },
      );
-
    }
 
   mergeLot(){
 
     this.setState({x: "pos"});
-    if (this.state.latitude != null && this.state.longitude!=null)
+    if (this.state.latitude != null && this.state.longitude!=null && this.state.cordLatitude!=null && this.state.cordLongitude !=null)
      {
        let concatLot = this.state.latitude +","+this.state.longitude
+       let concatDest = this.state.cordLatitude +","+ this.state.cordLongitude
        this.setState({
-         concat: concatLot
+         concat: concatLot,
+         concatDest: concatDest
        }, () => {
-         this.getDirections(concatLot, "6.270565,106.759550");
+         this.getDirections(concatLot, concatDest);
        });
      }
+    else if (this.state.latitude != null && this.state.longitude!=null)
+    {
+      let concatLot = this.state.latitude +","+this.state.longitude
+      this.setState({
+        concat: concatLot
+      }, () => {
+        this.getDirections(concatLot, "-6.270565,106.759550");
+      });
+    }
 
    }
 
@@ -83,6 +135,7 @@ class LocationA extends Component {
              this.setState({x: "true"})
              return coords
          } catch(error) {
+           console.log('masuk fungsi')
              this.setState({x: "error"})
              return error
          }
