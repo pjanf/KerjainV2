@@ -18,12 +18,13 @@ const WorkExperience= {
     }
 };
 
-const Education1= {
-    name: 'Education1',
+const Education4= {
+    name: 'Education4',
     properties: {
     school: 'string',
     degree: 'string',
-    major: 'string'
+    major: 'string',
+    graduation: 'string',
     }
 };
 
@@ -40,9 +41,9 @@ const JobsPosting8 = {
   }
 };
 
-let realm = new Realm({schema: [WorkExperience, JobsPosting8, Education1]});
+let realm = new Realm({schema: [WorkExperience, JobsPosting8, Education4]});
 
-let favs = realm.objects('Education1')
+let favs = realm.objects('Education4')
 
 class Register extends Component {
 	// eslint-disable-line
@@ -67,13 +68,14 @@ class Register extends Component {
         this.setState({ major })
       }
 
+
      _addItem () {
          if (this.state.school === '') return
            realm.write(() => {
-           realm.create('Education1', { school: this.state.school, degree: this.state.degree,
-             major: this.state.major})
+           realm.create('Education4', { school: this.state.school, degree: this.state.degree,
+             major: this.state.major, graduation: this.state.graduation})
          })
-         this.setState({ school: '', degree: '', major: ''})
+         this.setState({ school: '', degree: '', major: '', graduation: ''})
          this.props.navigation.navigate("Education")
      }
 
@@ -121,7 +123,7 @@ class Register extends Component {
                                 date={this.state.graduation}
                                 mode="date"
                                 placeholder="Graduation"
-                                format="YYYY-MM-DD"
+                                format="LL"
                                 minDate="2010-05-01"
                                 maxDate="2030-06-01"
                                 confirmBtnText="Confirm"

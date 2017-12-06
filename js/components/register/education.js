@@ -31,12 +31,13 @@ const WorkExperience= {
     }
 };
 
-const Education1= {
-    name: 'Education1',
+const Education4= {
+    name: 'Education4',
     properties: {
     school: 'string',
     degree: 'string',
-    major: 'string'
+    major: 'string',
+    graduation: 'string',
     }
 };
 
@@ -53,9 +54,9 @@ const JobsPosting8 = {
   }
 };
 
-let realm = new Realm({schema: [WorkExperience, JobsPosting8, Education1]});
+let realm = new Realm({schema: [WorkExperience, JobsPosting8, Education4]});
 
-let favs = realm.objects('Education1')
+let favs = realm.objects('Education4')
 
 class Register extends Component {
 	// eslint-disable-line
@@ -95,7 +96,7 @@ class Register extends Component {
                             </View>
                             <View>
                                 <Text style={{fontSize : 15, marginTop : 10, color : 'grey'}}>Graduation</Text>
-                                <Text style={{marginTop : 5}}>10 February 2018</Text>
+                                <Text style={{marginTop : 5}}>{f.graduation}</Text>
 
                                 <Text style={{fontSize : 15, marginTop : 10, color : 'grey'}}>Degree</Text>
                                 <Text style={{marginTop : 5}}>{f.degree}</Text>

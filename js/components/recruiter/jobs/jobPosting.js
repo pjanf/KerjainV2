@@ -21,12 +21,13 @@ const WorkExperience= {
     }
 };
 
-const Education1= {
-    name: 'Education1',
+const Education4= {
+    name: 'Education4',
     properties: {
     school: 'string',
     degree: 'string',
-    major: 'string'
+    major: 'string',
+    graduation: 'string',
     }
 };
 
@@ -39,11 +40,11 @@ const JobsPosting8 = {
     latitude: 'double',
     longitude:'double',
     description: 'string',
-    requirement: 'string'
+    requirement: 'string',
   }
 };
 
-let realm = new Realm({schema: [WorkExperience, JobsPosting8, Education1]});
+let realm = new Realm({schema: [WorkExperience, JobsPosting8, Education4]});
 
 let favs = realm.objects('JobsPosting8')
 
