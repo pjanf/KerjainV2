@@ -9,12 +9,14 @@ const cover = require('../../../img/contacts/sankhadeep.png');
 
 const Realm = require ('realm');
 
-const WorkExperience= {
-    name: 'WorkExperience',
+const WorkExperience1= {
+    name: 'WorkExperience1',
     properties: {
     companyName: 'string',
     position: 'string',
-    description: 'string'
+    description: 'string',
+    dateJoin: 'string',
+    dateLeft: 'string',
     }
 };
 
@@ -41,7 +43,7 @@ const JobsPosting8 = {
   }
 };
 
-let realm = new Realm({schema: [WorkExperience, JobsPosting8, Education4]});
+let realm = new Realm({schema: [WorkExperience1, JobsPosting8, Education4]});
 
 let favs = realm.objects('JobsPosting8');
 

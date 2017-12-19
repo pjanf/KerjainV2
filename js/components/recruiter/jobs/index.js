@@ -23,12 +23,14 @@ import {
 
 import styles from "./style";
 
-const WorkExperience= {
-    name: 'WorkExperience',
+const WorkExperience1= {
+    name: 'WorkExperience1',
     properties: {
     companyName: 'string',
     position: 'string',
-    description: 'string'
+    description: 'string',
+    dateJoin: 'string',
+    dateLeft: 'string',
     }
 };
 
@@ -55,17 +57,21 @@ const JobsPosting8 = {
   }
 };
 
-let realm = new Realm({schema: [WorkExperience, JobsPosting8, Education4]});
+let realm = new Realm({schema: [WorkExperience1, JobsPosting8, Education4]});
 
 let favs = realm.objects('JobsPosting8')
 
 const drawerImage = require("../../../../img/companyLogo/dataon.jpg");
 const companyImage = require("../../../../img/company/dataon/112116_NBC_1.jpg");
 
+var today = new Date();
+date=today.getDate() + "/"+ parseInt(today.getMonth()+1) +"/"+ today.getFullYear();
+
 export default class Jobs extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            today: new Date(),
             postjobs:'',
             realm: null,
             title: '',
@@ -105,7 +111,7 @@ export default class Jobs extends Component {
                            <Icon name='md-trash' />
                         </TouchableOpacity>
                     </View>
-                    <Text style={{ fontSize:12, fontFamily:'Roboto', color:'#a19c9c' }}>Posted: 11 Agustus 2017</Text>
+                    <Text style={{ fontSize:12, fontFamily:'Roboto', color:'#a19c9c' }}>Posted: {this.state.today.toString()}</Text>
                     <View style={{ flex:1, flexDirection:'row', margin:0, padding:0 }}>
                         <Button button small transparent style={{ height:35, paddingLeft:0 }} onPress={() => this.props.navigation.navigate("ScheduleI")}>
                             <Badge warning>

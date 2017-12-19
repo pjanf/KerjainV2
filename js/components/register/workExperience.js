@@ -22,12 +22,14 @@ const datas = [
 
 const Realm = require ('realm');
 
-const WorkExperience= {
-    name: 'WorkExperience',
+const WorkExperience1= {
+    name: 'WorkExperience1',
     properties: {
     companyName: 'string',
     position: 'string',
     description: 'string',
+    dateJoin: 'string',
+    dateLeft: 'string',
     }
 };
 
@@ -54,9 +56,9 @@ const JobsPosting8 = {
   }
 };
 
-let realm = new Realm({schema: [WorkExperience, JobsPosting8, Education4]});
+let realm = new Realm({schema: [WorkExperience1, JobsPosting8, Education4]});
 
-let favs = realm.objects('WorkExperience')
+let favs = realm.objects('WorkExperience1')
 
 class Register extends Component {
 	// eslint-disable-line
@@ -96,7 +98,7 @@ class Register extends Component {
                             </View>
                             <View>
                                 <Text style={{fontSize : 15, marginTop : 10, color : 'grey'}}>Working Periode</Text>
-                                <Text style={{marginTop : 5}}>24 Jan 2017 - 26 November 2017</Text>
+                                <Text style={{marginTop : 5}}>{f.dateJoin} - {f.dateLeft}</Text>
 
                                 <Text style={{fontSize : 15, marginTop : 10, color : 'grey'}}>Position</Text>
                                 <Text style={{marginTop : 5}}>{f.position}</Text>

@@ -9,12 +9,14 @@ import DatePicker from 'react-native-datepicker'
 
 const Realm = require ('realm');
 
-const WorkExperience= {
-    name: 'WorkExperience',
+const WorkExperience1= {
+    name: 'WorkExperience1',
     properties: {
     companyName: 'string',
     position: 'string',
     description: 'string',
+    dateJoin: 'string',
+    dateLeft: 'string',
     }
 };
 
@@ -41,9 +43,9 @@ const JobsPosting8 = {
   }
 };
 
-let realm = new Realm({schema: [WorkExperience, JobsPosting8, Education4]});
+let realm = new Realm({schema: [WorkExperience1, JobsPosting8, Education4]});
 
-let favs = realm.objects('WorkExperience')
+let favs = realm.objects('WorkExperience1')
 
 class Register extends Component {
 	// eslint-disable-line
@@ -51,6 +53,7 @@ class Register extends Component {
 	 constructor(props) {
         super(props);
         this.state = {
+
             dateJoin:'',
             dateLeft:'',
             companyName: '',
@@ -72,10 +75,10 @@ class Register extends Component {
       _addItem () {
         if (this.state.companyName === '') return
           realm.write(() => {
-          realm.create('WorkExperience', { companyName: this.state.companyName, position: this.state.position,
-            description: this.state.description})
+          realm.create('WorkExperience1', { companyName: this.state.companyName, position: this.state.position,
+            description: this.state.description, dateJoin: this.state.dateJoin, dateLeft: this.state.dateLeft})
         })
-        this.setState({ companyName: '', position: '', description: ''})
+        this.setState({ companyName: '', position: '', description: '', dateJoin: '', dateLeft: ''})
         this.props.navigation.navigate("WorkExperience")
       }
 
@@ -130,9 +133,9 @@ class Register extends Component {
 					            date={this.state.dateLeft}
 					            mode="date"
 					            placeholder="Until"
-					            format="YYYY-MM-DD"
-					            minDate="LL"
-					            maxDate="LL"
+					            format="LL"
+                                minDate="2010-05-01"
+                                maxDate="2030-06-01"
 					            confirmBtnText="Confirm"
 					            cancelBtnText="Cancel"
 					            onDateChange={(date) => {this.setState({dateLeft: date})}}

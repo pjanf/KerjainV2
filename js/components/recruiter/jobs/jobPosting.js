@@ -12,12 +12,14 @@ import styles from './style';
 
 const Realm = require ('realm');
 
-const WorkExperience= {
-    name: 'WorkExperience',
+const WorkExperience1= {
+    name: 'WorkExperience1',
     properties: {
     companyName: 'string',
     position: 'string',
-    description: 'string'
+    description: 'string',
+    dateJoin: 'string',
+    dateLeft: 'string',
     }
 };
 
@@ -44,7 +46,7 @@ const JobsPosting8 = {
   }
 };
 
-let realm = new Realm({schema: [WorkExperience, JobsPosting8, Education4]});
+let realm = new Realm({schema: [WorkExperience1, JobsPosting8, Education4]});
 
 let favs = realm.objects('JobsPosting8')
 
@@ -157,7 +159,7 @@ export default class PersonalInfo extends Component { // eslint-disable-line
                       date={this.state.postjobs}
                       mode="date"
                       placeholder="Date Closed"
-                      format="YYYY-MM-DD"
+                      format="LL"
                       minDate="2010-05-01"
                       maxDate="2030-06-01"
                       confirmBtnText="Confirm"

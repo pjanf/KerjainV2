@@ -23,8 +23,8 @@ class LocationB extends Component {
   openSearchModal() {
     RNGooglePlaces.openPlacePickerModal({
 
-	  latitude: 53.544389,
-	  longitude: -113.490927,
+	  latitude: -6.363613,
+	  longitude: 106.828136,
 	  radius: 0.01
     })
     .then((place) => {
